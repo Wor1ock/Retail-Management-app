@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Table(name = "INTERSHIP_STORE")
 @Entity(name = "intership_Store")
-@NamePattern("%s|name")
+@NamePattern("%s - %s |name, number")
 public class Store extends StandardEntity {
     private static final long serialVersionUID = -6415346646198792417L;
 
