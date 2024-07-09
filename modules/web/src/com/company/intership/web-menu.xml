@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-intership" insertBefore="administration" caption="mainMsg://menu_config.application-intership">
+        <item screen="intership_Product.browse" caption="mainMsg://menu_config.intership_Product.browse"/>
+        <item screen="intership_TradeNetwork.browse" caption="mainMsg://menu_config.intership_TradeNetwork.browse"/>
+        <item screen="intership_ProductManufacturer.browse"
+              caption="mainMsg://menu_config.intership_ProductManufacturer.browse"/>
+        <item screen="intership_Store.browse" caption="mainMsg://menu_config.intership_Store.browse"/>
     </menu>
 </menu-config>
