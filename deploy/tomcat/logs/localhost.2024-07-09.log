@@ -1,0 +1,2 @@
+09-Jul-2024 12:22:51.076 INFO [main] org.apache.catalina.core.ApplicationContext.log Initializing AtmosphereFramework
+09-Jul-2024 12:22:51.458 INFO [main] org.apache.catalina.core.ApplicationContext.log No Spring WebApplicationInitializer types detected on classpath
