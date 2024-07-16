@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.entity.annotation.EmbeddedParameters;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Table(name = "INTERSHIP_STORE")
 @Entity(name = "intership_Store")
@@ -16,6 +17,12 @@ public class Store extends StandardEntity {
     @NotNull
     @Column(name = "NUMBER_", nullable = false, unique = true)
     private String number;
+
+    @OneToMany(mappedBy = "store")
+    private List<ProductInStore> productsInStore;
+
+    @Column(name = "STORE_TYPE")
+    private String storeType;
 
     @Embedded
     @EmbeddedParameters(nullAllowed = false)
@@ -34,6 +41,22 @@ public class Store extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TRADE_NETWORK_ID")
     private TradeNetwork tradeNetwork;
+
+    public StoreType getStoreType() {
+        return storeType == null ? null : StoreType.fromId(storeType);
+    }
+
+    public void setStoreType(StoreType storeType) {
+        this.storeType = storeType == null ? null : storeType.getId();
+    }
+
+    public List<ProductInStore> getProductsInStore() {
+        return productsInStore;
+    }
+
+    public void setProductsInStore(List<ProductInStore> productsInStore) {
+        this.productsInStore = productsInStore;
+    }
 
     public Address getAddress() {
         return address;
