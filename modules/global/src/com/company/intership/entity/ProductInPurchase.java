@@ -16,10 +16,10 @@ public class ProductInPurchase extends StandardEntity {
     @JoinColumn(name = "PURCHASE_ID")
     private Purchase purchase;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_ID")
-    private Product product;
+    @NotNull
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    private ProductInStore product;
 
     @NotNull
     @Column(name = "PRICE", nullable = false)
@@ -28,6 +28,14 @@ public class ProductInPurchase extends StandardEntity {
     @NotNull
     @Column(name = "QUANTITY", nullable = false)
     private Integer quantity;
+
+    public void setProduct(ProductInStore product) {
+        this.product = product;
+    }
+
+    public ProductInStore getProduct() {
+        return product;
+    }
 
     public Integer getQuantity() {
         return quantity;
@@ -43,14 +51,6 @@ public class ProductInPurchase extends StandardEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public Purchase getPurchase() {

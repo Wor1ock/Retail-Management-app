@@ -14,10 +14,10 @@ import java.time.LocalDate;
 public class PriceHistory extends StandardEntity {
     private static final long serialVersionUID = -2176950837829876414L;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_ID")
-    private Product product;
+    @NotNull
+    private ProductInStore product;
 
     @NotNull
     @OnDelete(DeletePolicy.CASCADE)
@@ -35,6 +35,14 @@ public class PriceHistory extends StandardEntity {
     @NotNull
     @Column(name = "NEW_PRICE", nullable = false)
     private BigDecimal newPrice;
+
+    public void setProduct(ProductInStore product) {
+        this.product = product;
+    }
+
+    public ProductInStore getProduct() {
+        return product;
+    }
 
     public BigDecimal getNewPrice() {
         return newPrice;
@@ -68,11 +76,4 @@ public class PriceHistory extends StandardEntity {
         this.store = store;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 }
