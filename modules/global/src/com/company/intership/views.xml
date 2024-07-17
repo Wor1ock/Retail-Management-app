@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
+    <view entity="intership_ProductInStore" name="productInStore-view" extends="_local">
+        <property name="product" view="_minimal"/>
+        <property name="store" view="_minimal"/>
+    </view>
 </views>

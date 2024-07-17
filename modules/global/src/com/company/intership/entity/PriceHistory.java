@@ -76,4 +76,7 @@ public class PriceHistory extends StandardEntity {
         this.store = store;
     }
 
+    public void setPriceHistoryDate(LocalDate date) {
+        this.date = date;
+    }
 }
