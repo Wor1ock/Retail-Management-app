@@ -18,6 +18,9 @@ public class ProductManufacturer extends StandardEntity {
     @Column(name = "NAME", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "FULL_NAME")
+    private String fullName;
+
     @Embedded
     @EmbeddedParameters(nullAllowed = false)
     @AttributeOverrides({
@@ -26,9 +29,6 @@ public class ProductManufacturer extends StandardEntity {
             @AttributeOverride(name = "building", column = @Column(name = "ADDRESS_BUILDING"))
     })
     private Address address;
-
-    @Column(name = "FULL_NAME")
-    private String fullName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
