@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://storeEdit.caption"
         focusComponent="form"
@@ -7,40 +6,98 @@
         <instance id="storeDc"
                   class="com.company.intership.entity.Store">
             <view extends="_local">
-                <property name="tradeNetwork" view="_minimal">
-                    <property name="fullName"/>
+                <property name="productsInStore" view="_minimal">
+                    <property name="product" view="_minimal"/>
                 </property>
+                <property name="address" view="_minimal">
+                    <property name="city"/>
+                    <property name="street"/>
+                    <property name="building"/>
+                </property>
+                <property name="tradeNetwork" view="_minimal"/>
             </view>
             <loader/>
         </instance>
+
+        <collection id="productsDc"
+                    class="com.company.intership.entity.ProductInStore"
+                    view="productInStore-view">
+            <loader id="productsDl">
+                <query>
+                    <![CDATA[select e from intership_ProductInStore e where e.store.id = :storeId]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="storeDc">
-            <column width="350px">
-                <textField id="numberField" property="number"/>
-                <textField id="nameField" property="name"/>
-                <pickerField id="tradeNetworkField" property="tradeNetwork">
-                    <actions>
-                        <action id="lookup" type="picker_lookup"/>
-                        <action id="clear" type="picker_clear"/>
-                    </actions>
-                </pickerField>
-            </column>
-        </form>
-        <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-            <button id="closeBtn" action="windowClose"/>
-        </hbox>
-        <tabSheet>
-            <tab id="networkTab" caption="Торговая сеть">
-                <form id="networkForm" dataContainer="storeDc"> <!-- Форма для данных о торговой сети -->
-                    <column width="350px">
-                        <textField id="tradeNetworkNameField" property="tradeNetwork.name"/>
-                        <textField id="tradeNetworkFullNameField" property="tradeNetwork.fullName"/>
+    <layout expand="tabSheet"
+            spacing="true">
+        <tabSheet id="tabSheet"
+                  width="100%">
+            <tab id="mainTab"
+                 caption="Main">
+                <form id="form"
+                      dataContainer="storeDc">
+                    <column width="250px">
+                        <textField id="number"
+                                   property="number"
+                                   caption="Number"/>
+                        <textField id="nameField"
+                                   property="name"
+                                   caption="Name"/>
+                        <textField id="cityField"
+                                   property="address.city"
+                                   caption="City"/>
+                        <pickerField id="tradeNetwork" property="tradeNetwork">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                        <textField id="streetField"
+                                   property="address.street"
+                                   caption="Street"/>
+                        <textField id="houseNumberField"
+                                   property="address.building"
+                                   caption="House Number"/>
                     </column>
                 </form>
+                <hbox id="editActions" spacing="true">
+                    <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                    <button id="closeBtn" action="windowClose"/>
+                </hbox>
+            </tab>
+            <tab id="productsTab"
+                 caption="Products">
+                <groupTable id="productsTable"
+                            width="100%"
+                            height="100%"
+                            dataContainer="productsDc">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="product.name"
+                                caption="Product"/>
+                        <column id="price"
+                                caption="Price"/>
+                        <column id="quantity"
+                                caption="Quantity"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="productsTable.create"/>
+                        <button id="editBtn"
+                                action="productsTable.edit"/>
+                        <button id="removeBtn"
+                                action="productsTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
             </tab>
         </tabSheet>
     </layout>
