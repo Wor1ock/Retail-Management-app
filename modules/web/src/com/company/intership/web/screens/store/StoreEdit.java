@@ -11,6 +11,8 @@ import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 import com.company.intership.entity.Store;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 
@@ -27,7 +29,7 @@ public class StoreEdit extends StandardEditor<Store> {
     private CollectionLoader<ProductInStore> productsDl;
     @Inject
     private CollectionContainer<ProductInStore> productsDc;
-
+    private static final Logger log = LoggerFactory.getLogger(StoreEdit.class);
     private void processAfterCloseEvent(AfterScreenCloseEvent<ProductInStoreEdit> afterCloseEvent) {
         if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
             ProductInStore productInStore = afterCloseEvent.getScreen().getEditedEntity();
@@ -37,14 +39,19 @@ public class StoreEdit extends StandardEditor<Store> {
             // Проверка на дубликаты и обновление количества
             boolean isDuplicate = false;
             for (ProductInStore p : productsDc.getMutableItems()) {
-                if (p.getProduct().equals(productInStore.getProduct()) && p.getPrice().compareTo(productInStore.getPrice()) == 0) {
+                if (p.getProduct().equals(productInStore.getProduct())
+                        && p.getPrice().compareTo(productInStore.getPrice()) == 0) {
                     p.setQuantity(p.getQuantity() + productInStore.getQuantity());
                     isDuplicate = true;
+                    log.info("Updated quantity for existing product: {}. New quantity: {}",
+                            p.getProduct().getName(), p.getQuantity());
                     break;
                 }
             }
             if (!isDuplicate) {
                 productsDc.getMutableItems().add(productInStore);
+                log.info("Added new product to store: {} with quantity: {}",
+                        productInStore.getProduct().getName(), productInStore.getQuantity());
             }
         }
     }
