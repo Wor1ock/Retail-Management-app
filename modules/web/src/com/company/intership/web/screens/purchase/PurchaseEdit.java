@@ -3,6 +3,7 @@ package com.company.intership.web.screens.purchase;
 import com.company.intership.entity.ProductInPurchase;
 import com.company.intership.entity.ProductInStore;
 import com.company.intership.web.screens.productinpurchase.ProductInPurchaseEdit;
+import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.builders.AfterScreenCloseEvent;
@@ -36,6 +37,8 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
     @Inject
     private CollectionLoader<ProductInPurchase> productInPurchaseDl;
     private static final Logger log = LoggerFactory.getLogger(PurchaseEdit.class);
+    @Inject
+    private DataManager dataManager;
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
@@ -78,6 +81,10 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
             ProductInPurchase editedEntity = afterCloseEvent.getScreen().getEditedEntity();
             ProductInStore productInStore = editedEntity.getProductInStore();
 
+            if(editedEntity.getQuantity() == 0){
+                return;
+            }
+
             if (editedEntity.getQuantity() > productInStore.getQuantity()) {
                 editedEntity.setQuantity(productInStore.getQuantity());
                 productInStore.setQuantity(0);
@@ -88,13 +95,14 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
                         .show();
 
                 log.info("Product {} is out of stock", productInStore.getProduct().getName());
-
+                return;
             } else {
                 productInStore.setQuantity(productInStore.getQuantity() - editedEntity.getQuantity());
                 log.info("Decreased quantity of product {} by {}", productInStore.getProduct().getName(), editedEntity.getQuantity());
             }
 
             productsInPurchaseDc.getMutableItems().add(editedEntity);
+            dataManager.commit(productInStore);
             log.info("Added/Updated product in purchase: {}", editedEntity.getProductInStore().getProduct().getName());
         }
     }

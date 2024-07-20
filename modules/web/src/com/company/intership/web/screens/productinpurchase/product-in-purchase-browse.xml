@@ -33,8 +33,6 @@
                     dataContainer="productInPurchasesDc">
             <actions>
                 <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
             </actions>
             <columns>
                 <column id="productInStore"/>
@@ -45,8 +43,6 @@
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="productInPurchasesTable.create"/>
-                <button id="editBtn" action="productInPurchasesTable.edit"/>
-                <button id="removeBtn" action="productInPurchasesTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
