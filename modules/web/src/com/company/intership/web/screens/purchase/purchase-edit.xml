@@ -46,7 +46,7 @@
                 </actions>
 
                 <columns>
-                    <column id="product.product.name"/>
+                    <column id="productInStore.product.name"/>
                     <column id="price"/>
                     <column id="quantity"/>
                 </columns>

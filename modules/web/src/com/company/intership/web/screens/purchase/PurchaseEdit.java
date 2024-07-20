@@ -3,8 +3,6 @@ package com.company.intership.web.screens.purchase;
 import com.company.intership.entity.ProductInPurchase;
 import com.company.intership.entity.ProductInStore;
 import com.company.intership.web.screens.productinpurchase.ProductInPurchaseEdit;
-import com.company.intership.web.screens.store.StoreEdit;
-import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.builders.AfterScreenCloseEvent;
@@ -49,7 +47,10 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
         log.info("Creating new ProductInPurchase entity");
         screenBuilders.editor(ProductInPurchase.class, this)
                 .newEntity()
-                .withScreenClass(ProductInPurchaseEdit.class)
+                .withInitializer(productInPurchase -> {
+                    productInPurchase.setPurchase(getEditedEntity());
+                })
+                    .withScreenClass(ProductInPurchaseEdit.class)
                 .withParentDataContext(dataContext)
                 .withAfterCloseListener(this::processAfterCloseEvent)
                 .build()
@@ -62,6 +63,9 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
         if (productInPurchaseTable.getSingleSelected() != null) {
             screenBuilders.editor(ProductInPurchase.class, this)
                     .editEntity(productInPurchaseTable.getSingleSelected())
+                    .withInitializer(productInPurchase -> {
+                        productInPurchase.setPurchase(getEditedEntity());
+                    })
                     .withScreenClass(ProductInPurchaseEdit.class)
                     .withParentDataContext(dataContext)
                     .withAfterCloseListener(this::processAfterCloseEvent)
@@ -72,7 +76,7 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
     private void processAfterCloseEvent(AfterScreenCloseEvent<ProductInPurchaseEdit> afterCloseEvent) {
         if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
             ProductInPurchase editedEntity = afterCloseEvent.getScreen().getEditedEntity();
-            ProductInStore productInStore = editedEntity.getProduct();
+            ProductInStore productInStore = editedEntity.getProductInStore();
 
             if (editedEntity.getQuantity() > productInStore.getQuantity()) {
                 editedEntity.setQuantity(productInStore.getQuantity());
@@ -91,7 +95,7 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
             }
 
             productsInPurchaseDc.getMutableItems().add(editedEntity);
-            log.info("Added/Updated product in purchase: {}", editedEntity.getProduct().getProduct().getName());
+            log.info("Added/Updated product in purchase: {}", editedEntity.getProductInStore().getProduct().getName());
         }
     }
 }

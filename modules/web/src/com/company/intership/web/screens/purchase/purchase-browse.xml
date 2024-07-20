@@ -9,13 +9,6 @@
                     class="com.company.intership.entity.Purchase">
             <view extends="_local">
                 <property name="store" view="_minimal"/>
-                <property name="productsInPurchase" view="_minimal">
-                    <property name="product" view="_minimal">
-                        <property name="product" view="_minimal"/>
-                    </property>
-                    <property name="price"/>
-                    <property name="quantity"/>
-                </property>
             </view>
             <loader id="purchasesDl">
                 <query>

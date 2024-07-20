@@ -8,7 +8,7 @@
         <collection id="productInPurchasesDc"
                     class="com.company.intership.entity.ProductInPurchase">
             <view extends="_local">
-                <property name="product" view="_minimal">
+                <property name="productInStore" view="_minimal">
                     <property name="product" view="_minimal"/>
                 </property>
             </view>
@@ -37,7 +37,7 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="product"/>
+                <column id="productInStore"/>
                 <column id="price"/>
                 <column id="quantity"/>
             </columns>

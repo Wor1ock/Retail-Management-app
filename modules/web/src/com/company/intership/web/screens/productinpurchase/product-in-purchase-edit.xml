@@ -7,29 +7,52 @@
         <instance id="productInPurchaseDc"
                   class="com.company.intership.entity.ProductInPurchase">
             <view extends="_local">
-                <property name="product" view="_minimal">
-                    <property name="product" view="_minimal"/>
-                </property>
+                <property name="purchase" view="_minimal"/>
+                <property name="productInStore" view="_minimal"/>
             </view>
             <loader/>
         </instance>
+
+        <collection id="productsInStoreDc"
+                    class="com.company.intership.entity.ProductInStore"
+        view="productInStore-view">
+            <loader id="productsInStoreDl">
+                <query><![CDATA[select p from intership_ProductInStore p where p.store.id = :storeId]]></query>
+            </loader>
+        </collection>
     </data>
+
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="productInPurchaseDc">
-            <column width="350px">
-                <pickerField id="productField" property="product">
-                    <actions>
-                        <action id="lookup" type="picker_lookup"/>
-                        <action id="clear" type="picker_clear"/>
-                    </actions>
-                </pickerField>
-                <textField id="priceField" property="price"/>
-                <textField id="quantityField" property="quantity"/>
-            </column>
-        </form>
-        <hbox id="editActions" spacing="true">
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+
+    <layout spacing="true">
+
+        <groupBox id="productInPurchaseBox" height="AUTO">
+            <form id="form" dataContainer="productInPurchaseDc">
+                <column>
+                    <pickerField id="purchaseField" property="purchase"/>
+                    <pickerField id="productInStorePicker" property="productInStore"/>
+                    <textField id="priceField" property="price"/>
+                    <textField id="quantityField" property="quantity"/>
+                </column>
+            </form>
+        </groupBox>
+
+        <vbox spacing="true" width="100%" height="auto">
+            <table id="productsInStoreTable"
+                   dataContainer="productsInStoreDc" multiselect="false">
+                <columns>
+                    <column id="product.name"/>
+                    <column id="price"/>
+                    <column id="quantity"/>
+                </columns>
+            </table>
+        </vbox>
+
+        <hbox spacing="true" width="100%" align="MIDDLE_LEFT">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
         </hbox>

@@ -19,7 +19,7 @@ public class ProductInPurchase extends StandardEntity {
     @JoinColumn(name = "PRODUCT_ID")
     @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    private ProductInStore product;
+    private ProductInStore productInStore;
 
     @NotNull
     @Column(name = "PRICE", nullable = false)
@@ -29,12 +29,12 @@ public class ProductInPurchase extends StandardEntity {
     @Column(name = "QUANTITY", nullable = false)
     private Integer quantity;
 
-    public void setProduct(ProductInStore product) {
-        this.product = product;
+    public void setProductInStore(ProductInStore productInStore) {
+        this.productInStore = productInStore;
     }
 
-    public ProductInStore getProduct() {
-        return product;
+    public ProductInStore getProductInStore() {
+        return productInStore;
     }
 
     public Integer getQuantity() {
