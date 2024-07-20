@@ -8,16 +8,17 @@
                   class="com.company.intership.entity.Purchase">
             <view extends="_local">
                 <property name="store" view="_minimal"/>
-                <property name="productsInPurchase" view="_minimal">
-                    <property name="product" view="_minimal">
-                        <property name="product" view="_minimal"/>
-                    </property>
-                    <property name="price"/>
-                    <property name="quantity"/>
-                </property>
+                <property name="productsInPurchase" view="productInPurchase-view"/>
             </view>
             <loader/>
         </instance>
+
+        <collection id="productsInPurchaseDc" class="com.company.intership.entity.ProductInPurchase"
+                    view="productInPurchase-view">
+            <loader id="productInPurchaseDl">
+                <query><![CDATA[select e from intership_ProductInPurchase e where e.purchase = :purchaseDc]]></query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
@@ -32,6 +33,34 @@
                 </pickerField>
             </column>
         </form>
+        <groupBox id="productsInPurchaseContainer"
+                  caption="msg://productsInPurchaseContainer.caption">
+
+            <table id="productInPurchaseTable" dataContainer="productsInPurchaseDc"
+                   width="100%" height="200px">
+
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+
+                <columns>
+                    <column id="product.product.name"/>
+                    <column id="price"/>
+                    <column id="quantity"/>
+                </columns>
+
+                <buttonsPanel>
+                    <button action="productInPurchaseTable.create"/>
+                    <button action="productInPurchaseTable.edit"/>
+                    <button action="productInPurchaseTable.remove"/>
+                </buttonsPanel>
+
+            </table>
+
+        </groupBox>
+
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>

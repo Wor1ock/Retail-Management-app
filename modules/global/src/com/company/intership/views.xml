@@ -5,4 +5,9 @@
         <property name="product" view="_minimal"/>
         <property name="store" view="_minimal"/>
     </view>
+    <view entity="intership_ProductInPurchase" name="productInPurchase-view" extends="_local">
+        <property name="product" view="_minimal">
+            <property name="product" view="_minimal"/>
+        </property>
+    </view>
 </views>
