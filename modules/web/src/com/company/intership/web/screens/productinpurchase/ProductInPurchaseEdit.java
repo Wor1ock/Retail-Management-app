@@ -1,20 +1,16 @@
 package com.company.intership.web.screens.productinpurchase;
 
+import com.company.intership.entity.ProductInPurchase;
 import com.company.intership.entity.ProductInStore;
 import com.company.intership.entity.Purchase;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.gui.components.PickerField;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
-import com.company.intership.entity.ProductInPurchase;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.util.List;
 
 @UiController("intership_ProductInPurchase.edit")
 @UiDescriptor("product-in-purchase-edit.xml")
@@ -30,16 +26,19 @@ public class ProductInPurchaseEdit extends StandardEditor<ProductInPurchase> {
     private PickerField<ProductInStore> productInStorePicker;
     @Inject
     private CollectionLoader<ProductInStore> productsInStoreDl;
+
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         productsInStoreDl.setParameter("storeId", getEditedEntity().getPurchase().getStore().getId());
         productsInStoreDl.load();
     }
+
     @Subscribe
     public void onInitEntity(InitEntityEvent<ProductInPurchase> event) {
         event.getEntity().setQuantity(0);
         purchaseField.setEditable(false);
     }
+
     @Subscribe("productsInStoreTable")
     public void onProductInStoresTableSelection(Table.SelectionEvent<ProductInStore> event) {
         ProductInStore productInStore = event.getSelected().iterator().next();

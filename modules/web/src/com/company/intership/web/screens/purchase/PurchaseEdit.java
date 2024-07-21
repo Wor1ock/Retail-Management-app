@@ -2,6 +2,7 @@ package com.company.intership.web.screens.purchase;
 
 import com.company.intership.entity.ProductInPurchase;
 import com.company.intership.entity.ProductInStore;
+import com.company.intership.entity.Purchase;
 import com.company.intership.web.screens.productinpurchase.ProductInPurchaseEdit;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.Notifications;
@@ -13,7 +14,6 @@ import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
-import com.company.intership.entity.Purchase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +45,7 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
         productInPurchaseDl.setParameter("purchaseDc", getEditedEntity());
         productInPurchaseDl.load();
     }
+
     @Subscribe("productInPurchaseTable.create")
     public void onProductInPurchaseTableCreate(Action.ActionPerformedEvent event) {
         log.info("Creating new ProductInPurchase entity");
@@ -53,7 +54,7 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
                 .withInitializer(productInPurchase -> {
                     productInPurchase.setPurchase(getEditedEntity());
                 })
-                    .withScreenClass(ProductInPurchaseEdit.class)
+                .withScreenClass(ProductInPurchaseEdit.class)
                 .withParentDataContext(dataContext)
                 .withAfterCloseListener(this::processAfterCloseEvent)
                 .build()
@@ -76,12 +77,13 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
                     .show();
         }
     }
+
     private void processAfterCloseEvent(AfterScreenCloseEvent<ProductInPurchaseEdit> afterCloseEvent) {
         if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
             ProductInPurchase editedEntity = afterCloseEvent.getScreen().getEditedEntity();
             ProductInStore productInStore = editedEntity.getProductInStore();
 
-            if(editedEntity.getQuantity() == 0){
+            if (editedEntity.getQuantity() == 0) {
                 return;
             }
 

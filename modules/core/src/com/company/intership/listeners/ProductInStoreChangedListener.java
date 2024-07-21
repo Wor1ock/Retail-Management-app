@@ -2,23 +2,20 @@ package com.company.intership.listeners;
 
 import com.company.intership.entity.PriceHistory;
 import com.company.intership.entity.ProductInStore;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.UUID;
-
 import com.haulmont.cuba.core.app.events.EntityChangedEvent;
 import com.haulmont.cuba.core.entity.contracts.Id;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.Metadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import javax.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
 
 @Component("intership_ProductInStoreChangedListener")
 public class ProductInStoreChangedListener {

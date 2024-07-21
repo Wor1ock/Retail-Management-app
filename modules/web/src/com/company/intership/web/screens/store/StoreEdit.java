@@ -1,6 +1,7 @@
 package com.company.intership.web.screens.store;
 
 import com.company.intership.entity.ProductInStore;
+import com.company.intership.entity.Store;
 import com.company.intership.web.screens.productinstore.ProductInStoreEdit;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.builders.AfterScreenCloseEvent;
@@ -8,9 +9,7 @@ import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.GroupTable;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
-import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
-import com.company.intership.entity.Store;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +29,7 @@ public class StoreEdit extends StandardEditor<Store> {
     @Inject
     private CollectionContainer<ProductInStore> productsDc;
     private static final Logger log = LoggerFactory.getLogger(StoreEdit.class);
+
     private void processAfterCloseEvent(AfterScreenCloseEvent<ProductInStoreEdit> afterCloseEvent) {
         if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
             ProductInStore productInStore = afterCloseEvent.getScreen().getEditedEntity();
@@ -55,6 +55,7 @@ public class StoreEdit extends StandardEditor<Store> {
             }
         }
     }
+
     @Subscribe("productsTable.create")
     protected void onProductsTableCreate(Action.ActionPerformedEvent event) {
         screenBuilders.editor(productsTable)
