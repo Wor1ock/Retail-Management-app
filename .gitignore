@@ -2,14 +2,12 @@
 # CUBA Platform
 /build/
 /deploy/
-/modules/core/db/
 /modules/core/build/
 /modules/global/build/
 /modules/web/build/
 
 # Gradle
 /.gradle/
-/build.gradle
 /gradle-wrapper.jar
 /gradlew
 /gradlew.bat
