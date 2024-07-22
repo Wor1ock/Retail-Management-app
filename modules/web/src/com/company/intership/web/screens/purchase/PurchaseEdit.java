@@ -48,7 +48,6 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
 
     @Subscribe("productInPurchaseTable.create")
     public void onProductInPurchaseTableCreate(Action.ActionPerformedEvent event) {
-        log.info("Creating new ProductInPurchase entity");
         screenBuilders.editor(ProductInPurchase.class, this)
                 .newEntity()
                 .withInitializer(productInPurchase -> {
