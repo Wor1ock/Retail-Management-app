@@ -8,6 +8,7 @@
     <view entity="intership_ProductInPurchase" name="productInPurchase-view" extends="_local">
         <property name="productInStore" view="_minimal">
             <property name="product" view="_minimal"/>
+            <property name="quantity"/>
         </property>
         <property name="purchase" view="_minimal">
             <property name="store" view="_minimal"/>

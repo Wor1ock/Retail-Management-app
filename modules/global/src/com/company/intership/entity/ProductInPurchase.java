@@ -1,6 +1,7 @@
 package com.company.intership.entity;
 
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 
 @Table(name = "INTERSHIP_PRODUCT_IN_PURCHASE")
 @Entity(name = "intership_ProductInPurchase")
+@PublishEntityChangedEvents
 public class ProductInPurchase extends StandardEntity {
     private static final long serialVersionUID = -6184509418949999198L;
 
