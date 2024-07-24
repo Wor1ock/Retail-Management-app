@@ -22,4 +22,12 @@ public class PurchaseGetter {
                 .setViewName("purchase-view")
                 .getResultList();
     }
+
+    public List<Purchase> getPurchasesByTradeNetworkId(UUID tradeNetworkId) {
+        EntityManager entityManager = persistence.getEntityManager();
+        return entityManager.createQuery("SELECT p FROM intership_Purchase p WHERE p.store.tradeNetwork.id = :tradeNetworkId", Purchase.class)
+                .setParameter("tradeNetworkId", tradeNetworkId)
+                .setViewName("purchase-view")
+                .getResultList();
+    }
 }
