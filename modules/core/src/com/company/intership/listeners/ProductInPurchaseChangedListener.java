@@ -17,17 +17,12 @@ import java.util.UUID;
 public class ProductInPurchaseChangedListener {
     @Inject
     private TransactionalDataManager transactionalDataManager;
-    @Inject
-//    private Notifications notifications;
     private static final Logger log = LoggerFactory.getLogger(ProductInPurchaseChangedListener.class);
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void beforeCommit(EntityChangedEvent<ProductInPurchase, UUID> beforeCommitEvent) {
-        if(!beforeCommitEvent.getType().equals(EntityChangedEvent.Type.DELETED)){
-            ProductInPurchase editedProductInPurchase = transactionalDataManager
-                    .load(beforeCommitEvent.getEntityId())
-                    .view("productInPurchase-view")
-                    .one();
+        if (!beforeCommitEvent.getType().equals(EntityChangedEvent.Type.DELETED)) {
+            ProductInPurchase editedProductInPurchase = transactionalDataManager.load(beforeCommitEvent.getEntityId()).view("productInPurchase-view").one();
             ProductInStore productInStore = editedProductInPurchase.getProductInStore();
 
             if (editedProductInPurchase.getQuantity() == 0) {

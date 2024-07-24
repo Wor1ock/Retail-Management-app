@@ -54,12 +54,10 @@ public class StoreEdit extends StandardEditor<Store> {
 
             if (isDuplicate) {
                 dataContext.remove(productInStore);
-            }
-            else {
+            } else {
                 productsInStoreList.add(productInStore);
                 log.info("Added new product to store: {} with quantity: {}", productInStore.getProduct().getName(), productInStore.getQuantity());
             }
-            dataContext.commit();
         }
     }
 

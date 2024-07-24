@@ -4,8 +4,6 @@ import com.company.intership.entity.ProductInPurchase;
 import com.company.intership.entity.ProductInStore;
 import com.company.intership.entity.Purchase;
 import com.company.intership.web.screens.productinpurchase.ProductInPurchaseEdit;
-import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
-import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.builders.AfterScreenCloseEvent;
@@ -24,7 +22,6 @@ import javax.inject.Inject;
 @UiDescriptor("purchase-edit.xml")
 @EditedEntityContainer("purchaseDc")
 @LoadDataBeforeShow
-@PublishEntityChangedEvents
 public class PurchaseEdit extends StandardEditor<Purchase> {
     @Inject
     private ScreenBuilders screenBuilders;
