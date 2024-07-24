@@ -25,4 +25,7 @@
         </property>
         <property name="tradeNetwork" view="_minimal"/>
     </view>
+    <view entity="intership_Purchase" name="purchase-view" extends="_local">
+        <property name="store" view="_minimal"/>
+    </view>
 </views>

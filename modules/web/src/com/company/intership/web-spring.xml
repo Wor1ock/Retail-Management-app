@@ -13,6 +13,7 @@
             <map>
                 <entry key="intership_ProductManufacturerService"
                        value="com.company.intership.service.ProductManufacturerService"/>
+                <entry key="intership_PurchaseService" value="com.company.intership.service.PurchaseService"/>
             </map>
         </property>
     </bean>
