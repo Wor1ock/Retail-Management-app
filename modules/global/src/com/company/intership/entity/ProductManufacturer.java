@@ -2,6 +2,7 @@ package com.company.intership.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.EmbeddedParameters;
 import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
@@ -20,9 +21,26 @@ public class ProductManufacturer extends StandardEntity {
     @Column(name = "FULL_NAME")
     private String fullName;
 
+    @Embedded
+    @EmbeddedParameters(nullAllowed = false)
+    @AttributeOverrides({
+            @AttributeOverride(name = "city", column = @Column(name = "ADDRESS_CITY")),
+            @AttributeOverride(name = "street", column = @Column(name = "ADDRESS_STREET")),
+            @AttributeOverride(name = "building", column = @Column(name = "ADDRESS_BUILDING"))
+    })
+    private Address address;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public User getUser() {
         return user;

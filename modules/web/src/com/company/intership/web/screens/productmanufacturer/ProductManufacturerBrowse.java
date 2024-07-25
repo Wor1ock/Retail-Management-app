@@ -5,7 +5,7 @@ import com.company.intership.entity.ProductManufacturer;
 
 @UiController("intership_ProductManufacturer.browse")
 @UiDescriptor("product-manufacturer-browse.xml")
-@LookupComponent("table")
+@LookupComponent("productManufacturersTable")
 @LoadDataBeforeShow
-public class ProductManufacturerBrowse extends MasterDetailScreen<ProductManufacturer> {
+public class ProductManufacturerBrowse extends StandardLookup<ProductManufacturer> {
 }

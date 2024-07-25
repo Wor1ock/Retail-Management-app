@@ -1,74 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://productManufacturerBrowse.caption"
-        focusComponent="table"
+        focusComponent="productManufacturersTable"
         messagesPack="com.company.intership.web.screens.productmanufacturer">
-    <data>
+    <data readOnly="true">
         <collection id="productManufacturersDc"
                     class="com.company.intership.entity.ProductManufacturer">
-            <view extends="_local"/>
+            <view extends="_local">
+                <property name="address" view="_minimal">
+                    <property name="city"/>
+                    <property name="street"/>
+                    <property name="building"/>
+                </property>
+            </view>
             <loader id="productManufacturersDl">
                 <query>
                     <![CDATA[select e from intership_ProductManufacturer e]]>
                 </query>
             </loader>
         </collection>
-        <instance id="productManufacturerDc"
-                  class="com.company.intership.entity.ProductManufacturer">
-            <view extends="_local"/>
-            <loader/>
-        </instance>
     </data>
-    <actions>
-        <action id="save" icon="icons/ok.png" caption="mainMsg://actions.Ok" shortcut="CTRL-ENTER"/>
-        <action id="cancel" icon="icons/cancel.png" caption="mainMsg://actions.Cancel" description="Esc"/>
-    </actions>
-    <dialogMode height="600" width="800"/>
-    <layout>
-        <split id="split" height="100%" orientation="horizontal" reversePosition="true" width="100%">
-            <vbox id="lookupBox" expand="table" height="100%" margin="false,true,false,false" spacing="true">
-                <filter id="filter" applyTo="table" dataLoader="productManufacturersDl">
-                    <properties include=".*"/>
-                </filter>
-                <groupTable id="table"
-                            width="100%"
-                            dataContainer="productManufacturersDc">
-                    <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
-                    </actions>
-                    <columns>
-                        <column id="name"/>
-                        <column id="fullName"/>
-                    </columns>
-                    <rowsCount/>
-                    <buttonsPanel id="buttonsPanel"
-                                  alwaysVisible="true">
-                        <button id="createBtn" action="table.create"/>
-                        <button id="editBtn" action="table.edit"/>
-                        <button id="removeBtn" action="table.remove"/>
-                    </buttonsPanel>
-                </groupTable>
-                <hbox id="lookupActions" spacing="true" visible="false">
-                    <button action="lookupSelectAction"/>
-                    <button action="lookupCancelAction"/>
-                </hbox>
-            </vbox>
-            <vbox id="editBox" height="100%" margin="false,false,false,true" expand="fieldGroupBox" spacing="true">
-                <scrollBox id="fieldGroupBox">
-                    <form id="form" dataContainer="productManufacturerDc">
-                        <column width="350px">
-                            <textField id="nameField" property="name"/>
-                            <textField id="fullNameField" property="fullName"/>
-                        </column>
-                    </form>
-                </scrollBox>
-                <hbox id="actionsPane" spacing="true" visible="false">
-                    <button id="saveBtn" action="save"/>
-                    <button id="cancelBtn" action="cancel"/>
-                </hbox>
-            </vbox>
-        </split>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="productManufacturersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="productManufacturersTable"
+                dataLoader="productManufacturersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="productManufacturersTable"
+                    width="100%"
+                    dataContainer="productManufacturersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="fullName"/>
+                <column id="address.city"/>
+                <column id="address.street"/>
+                <column id="address.building"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="productManufacturersTable.create"/>
+                <button id="editBtn" action="productManufacturersTable.edit"/>
+                <button id="removeBtn" action="productManufacturersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
     </layout>
 </window>
