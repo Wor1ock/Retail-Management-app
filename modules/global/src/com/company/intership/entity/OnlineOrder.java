@@ -1,9 +1,12 @@
 package com.company.intership.entity;
 
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@PublishEntityChangedEvents
 @Entity(name = "intership_OnlineOrder")
 public class OnlineOrder extends Purchase {
     private static final long serialVersionUID = 1919316582231062618L;
@@ -13,11 +16,23 @@ public class OnlineOrder extends Purchase {
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
 
+    @NotNull
+    @Column(name = "ORDER_NUMBER", nullable = false, unique = true)
+    private String orderNumber;
+
     @Column(name = "ORDER_TOTAL")
     private BigDecimal orderTotal;
 
     @Column(name = "DISCOUNT")
     private Integer discount;
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 
     public Integer getDiscount() {
         return discount;
