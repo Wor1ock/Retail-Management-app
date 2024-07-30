@@ -34,25 +34,51 @@ public class StoreServiceBrowse extends Screen {
 
     @Subscribe("purchasesByStoreTable.createTable")
     public void onPurchasesByStoreTable(Action.ActionPerformedEvent event) {
-        List<Purchase> purchases = storeService
-                .getPurchasesByStoreId(storeField.getValue().getId());
-        showDataOrNotification(purchases, purchasesByStoreDc);
+        if (areFieldsNotEmpty(storeField.getValue())) {
+            List<Purchase> purchases = storeService.getPurchasesByStoreId(storeField.getValue().getId());
+            showDataOrNotification(purchases, purchasesByStoreDc);
+        } else {
+            showEmptyFieldNotification("Store");
+        }
     }
 
     @Subscribe("purchasesByTradeNetworkTable.createTable")
     public void onPurchasesByTradeNetworkTable(Action.ActionPerformedEvent event) {
-        List<Purchase> purchases = storeService
-                .getPurchasesByTradeNetworkId(tradeNetworkField.getValue().getId());
-        showDataOrNotification(purchases, purchasesByTradeNetworkDc);
+        if (areFieldsNotEmpty(tradeNetworkField.getValue())) {
+            List<Purchase> purchases = storeService.getPurchasesByTradeNetworkId(tradeNetworkField.getValue().getId());
+            showDataOrNotification(purchases, purchasesByTradeNetworkDc);
+        } else {
+            showEmptyFieldNotification("Trade Network");
+        }
+    }
+
+    private boolean areFieldsNotEmpty(Object... fields) {
+        for (Object field : fields) {
+            if (field == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void showDataOrNotification(List<Purchase> items, CollectionContainer<Purchase> table) {
         if (items.isEmpty()) {
-            notifications.create(Notifications.NotificationType.TRAY)
-                    .withCaption("Записей по данному запросу не найдено")
-                    .show();
+            notifications.create(Notifications.NotificationType.TRAY).withCaption("Записей по данному запросу не найдено").show();
         } else {
             table.setItems(items);
         }
+    }
+
+    private void showEmptyFieldNotification(String... fieldNames) {
+        StringBuilder message = new StringBuilder("Эти поля не заполнены: ");
+
+        for (int i = 0; i < fieldNames.length; i++) {
+            message.append(fieldNames[i]);
+            if (i < fieldNames.length - 1) {
+                message.append(", ");
+            }
+        }
+
+        notifications.create().withCaption(message.toString()).show();
     }
 }
