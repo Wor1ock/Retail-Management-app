@@ -16,6 +16,9 @@
         <item screen="intership_Purchase.browse" caption="mainMsg://menu_config.intership_Purchase.browse"/>
         <item screen="intership_ProductInPurchase.browse"
               caption="mainMsg://menu_config.intership_ProductInPurchase.browse"/>
+        <item screen="intership_ManufacturerServiceBrowse"
+              caption="mainMsg://menu_config.intership_ManufacturerServiceBrowse"/>
+        <item screen="intership_StoreServiceBrowse" caption="mainMsg://menu_config.intership_StoreServiceBrowse"/>
 
     </menu>
 </menu-config>

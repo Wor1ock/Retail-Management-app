@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://storeServiceBrowse.caption"
+        messagesPack="com.company.intership.web.screens.store_service">
+
+    <data>
+        <collection id="purchasesByStoreDc" class="com.company.intership.entity.Purchase"
+                    view="purchase-view"/>
+        <collection id="purchasesByTradeNetworkDc" class="com.company.intership.entity.Purchase"
+                    view="purchase-view"/>
+    </data>
+
+    <layout>
+        <tabSheet>
+            <tab id="tab_1" caption="msg://tab_1.caption" margin="true" spacing="true">
+                <vbox spacing="true" margin="true">
+                    <form dataContainer="purchasesByStoreDc">
+                        <column width="350px">
+                            <pickerField id="storeField" property="store">
+                                <actions>
+                                    <action id="lookup" type="picker_lookup"/>
+                                    <action id="clear" type="picker_clear"/>
+                                </actions>
+                            </pickerField>
+                        </column>
+                    </form>
+
+                    <hbox spacing="true" margin="true">
+                        <button id="applyButton1" caption="msg://applyButton.caption" action="purchasesByStoreTable.createTable"/>
+                    </hbox>
+                </vbox>
+
+                <vbox spacing="true" margin="true">
+                    <table id="purchasesByStoreTable" height="300px" width="100%" dataContainer="purchasesByStoreDc">
+                        <actions>
+                            <action id="createTable" type="create"/>
+                        </actions>
+                        <columns>
+                            <column id="createTs" caption="msg://date.caption"/>
+                        </columns>
+                    </table>
+                </vbox>
+            </tab>
+
+            <tab id="tab_2" caption="msg://tab_2.caption" margin="true" spacing="true">
+                <vbox spacing="true" margin="true">
+                    <form dataContainer="purchasesByTradeNetworkDc">
+                        <column width="350px">
+                            <pickerField id="tradeNetworkField" property="store.tradeNetwork">
+                                <actions>
+                                    <action id="lookup" type="picker_lookup"/>
+                                    <action id="clear" type="picker_clear"/>
+                                </actions>
+                            </pickerField>
+                        </column>
+                    </form>
+
+                    <hbox spacing="true" margin="true">
+                        <button id="applyButton2" caption="msg://applyButton.caption" action="purchasesByTradeNetworkTable.createTable"/>
+                    </hbox>
+                </vbox>
+
+                <vbox spacing="true" margin="true">
+                    <table id="purchasesByTradeNetworkTable" height="300px" width="100%" dataContainer="purchasesByTradeNetworkDc">
+                        <actions>
+                            <action id="createTable" type="create"/>
+                        </actions>
+                        <columns>
+                            <column id="createTs" caption="msg://date.caption"/>
+                        </columns>
+                    </table>
+                </vbox>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

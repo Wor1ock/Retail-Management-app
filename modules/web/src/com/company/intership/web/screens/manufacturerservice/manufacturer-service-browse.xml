@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://manufacturerServiceBrowse.caption"
+        messagesPack="com.company.intership.web.screens.manufacturerservice">
+    <data readOnly="true">
+        <collection id="productInStoresDc" class="com.company.intership.entity.ProductInStore"
+                    view="productInStore-full-view">
+            <loader/>
+        </collection>
+        <collection id="productInStoresDc2" class="com.company.intership.entity.ProductInStore"
+                    view="productInStore-full-view">
+            <loader/>
+        </collection>
+        <collection id="StoresDc3" class="com.company.intership.entity.Store"
+                    view="store-view">
+            <loader/>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <tabSheet>
+            <tab id="tab" caption="msg://tab.caption" margin="true" spacing="true">
+                <vbox spacing="true" margin="true">
+                    <form id="form" dataContainer="productInStoresDc">
+                        <column width="350px">
+                            <pickerField id="manufacturerField" property="product.manufacturer">
+                                <actions>
+                                    <action id="lookup" type="picker_lookup"/>
+                                    <action id="clear" type="picker_clear"/>
+                                </actions>
+                            </pickerField>
+                            <pickerField id="storeField" property="store">
+                                <actions>
+                                    <action id="lookup" type="picker_lookup"/>
+                                    <action id="clear" type="picker_clear"/>
+                                </actions>
+                            </pickerField>
+                            <textField id="thresholdField" property="quantity"/>
+                        </column>
+                    </form>
+                    <hbox spacing="true" margin="true">
+                        <button id="applyButton" caption="msg://applyButton.caption" action="productInStoresTable1.createTable"/>
+                    </hbox>
+                </vbox>
+                <vbox spacing="true" margin="true">
+                    <table id="productInStoresTable1" height="300px" width="100%" dataContainer="productInStoresDc">
+                        <actions>
+                            <action id="createTable" type="create"/>
+                        </actions>
+                        <columns>
+                            <column id="product" caption="msg://product.caption"/>
+                            <column id="price" caption="msg://price.caption"/>
+                            <column id="quantity" caption="msg://quantity.caption"/>
+                        </columns>
+                    </table>
+                </vbox>
+            </tab>
+
+            <tab id="tab_1" caption="msg://tab_1.caption" margin="true" spacing="true">
+                <vbox spacing="true" margin="true">
+                    <form dataContainer="productInStoresDc2">
+                        <column width="350px">
+                            <pickerField id="manufacturerField2" property="product.manufacturer">
+                                <actions>
+                                    <action id="lookup" type="picker_lookup"/>
+                                    <action id="clear" type="picker_clear"/>
+                                </actions>
+                            </pickerField>
+                            <textField id="thresholdField2" property="quantity"/>
+                        </column>
+                    </form>
+                    <hbox spacing="true" margin="true">
+                        <button id="applyButton2" caption="msg://applyButton.caption" action="productInStoresTable2.createTable"/>
+                    </hbox>
+                </vbox>
+                <vbox spacing="true" margin="true">
+                    <table id="productInStoresTable2" height="300px" width="100%" dataContainer="productInStoresDc2">
+                        <actions>
+                            <action id="createTable" type="create"/>
+                        </actions>
+                        <columns>
+                            <column id="product" caption="msg://product.caption"/>
+                            <column id="price" caption="msg://price.caption"/>
+                            <column id="quantity" caption="msg://quantity.caption"/>
+                            <column id="store" caption="msg://store.caption"/>
+                        </columns>
+                    </table>
+                </vbox>
+            </tab>
+
+            <tab id="tab_2" caption="msg://tab_2.caption" margin="true" spacing="true">
+                <vbox spacing="true" margin="true">
+                    <form dataContainer="StoresDc3">
+                        <column width="350px">
+                            <pickerField id="productField3" property="productsInStore.product">
+                                <actions>
+                                    <action id="lookup" type="picker_lookup"/>
+                                    <action id="clear" type="picker_clear"/>
+                                </actions>
+                            </pickerField>
+                        </column>
+                    </form>
+                    <hbox spacing="true" margin="true">
+                        <button id="applyButton3" caption="msg://applyButton.caption" action="StoresTable3.createTable"/>
+                    </hbox>
+                </vbox>
+                <vbox spacing="true" margin="true">
+                    <table id="StoresTable3" height="300px" width="100%" dataContainer="StoresDc3">
+                        <actions>
+                            <action id="createTable" type="create"/>
+                        </actions>
+                        <columns>
+                            <column id="productsInStore.store.name" caption="msg://store.caption"/>
+                            <column id="tradeNetwork" caption="msg://tradeNetwork.caption"/>
+                            <column id="address.city" caption="msg://addressCity.caption"/>
+                        </columns>
+                    </table>
+                </vbox>
+            </tab>
+
+        </tabSheet>
+
+    </layout>
+</window>
