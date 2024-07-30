@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://manufacturerServiceBrowse.caption"
-        messagesPack="com.company.intership.web.screens.manufacturer_service">
+        messagesPack="com.company.intership.web.screens.manufacturerservice">
     <data readOnly="true">
         <collection id="productInStoresDc" class="com.company.intership.entity.ProductInStore"
                     view="productInStore-full-view">

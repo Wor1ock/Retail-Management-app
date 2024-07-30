@@ -1,10 +1,11 @@
-package com.company.intership.web.screens.manufacturer_service;
+package com.company.intership.web.screens.manufacturerservice;
 
 import com.company.intership.entity.Product;
 import com.company.intership.entity.ProductInStore;
 import com.company.intership.entity.ProductManufacturer;
 import com.company.intership.entity.Store;
 import com.company.intership.service.ProductManufacturerService;
+import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.PickerField;
@@ -44,48 +45,67 @@ public class ManufacturerServiceBrowse extends Screen {
     @Inject
     private Notifications notifications;
 
-    private void showNoRecordsFoundNotification() {
-        notifications.create(Notifications.NotificationType.TRAY)
-                .withCaption("Записей по данному запросу не найдено")
-                .show();
-    }
-
     @Subscribe("productInStoresTable1.createTable")
     public void onProductInStoresCreateTable1(Action.ActionPerformedEvent event) {
-        List<ProductInStore> items = productManufacturerService.getProductsWithLowQuantity(
-                manufacturerField.getValue(),
-                storeField.getValue().getId(),
-                thresholdField.getValue());
+        if (areFieldsNotEmpty(storeField.getValue(), manufacturerField.getValue(), thresholdField.getValue())) {
+            List<ProductInStore> productInStores = productManufacturerService.getProductsWithLowQuantity(manufacturerField.getValue(), storeField.getValue().getId(), thresholdField.getValue());
 
-        if (items.isEmpty()) {
-            showNoRecordsFoundNotification();
+            showDataOrNotification(productInStores, productInStoresDc);
         } else {
-            productInStoresDc.setItems(items);
+            showEmptyFieldNotification("Manufacturer", "Store", "Threshold");
         }
     }
 
     @Subscribe("productInStoresTable2.createTable")
     public void onProductInStoresCreateTable2(Action.ActionPerformedEvent event) {
-        List<ProductInStore> items = productManufacturerService.getProductsWithLowQuantityFromAllStores(
-                manufacturerField2.getValue(),
-                thresholdField2.getValue());
+        if (areFieldsNotEmpty(storeField.getValue(), manufacturerField.getValue(), thresholdField.getValue())) {
+            List<ProductInStore> productInStores = productManufacturerService.getProductsWithLowQuantityFromAllStores(manufacturerField2.getValue(), thresholdField2.getValue());
 
-        if (items.isEmpty()) {
-            showNoRecordsFoundNotification();
+            showDataOrNotification(productInStores, productInStoresDc2);
         } else {
-            productInStoresDc2.setItems(items);
+            showEmptyFieldNotification("Manufacturer", "Threshold");
         }
     }
 
     @Subscribe("StoresTable3.createTable")
     public void onProductInStoresCreateTable3(Action.ActionPerformedEvent event) {
-        List<Store> items = productManufacturerService.getStoresWithoutProduct(productField3.getValue());
+        if (areFieldsNotEmpty(storeField.getValue(), manufacturerField.getValue(), thresholdField.getValue())) {
+            List<Store> stores = productManufacturerService.getStoresWithoutProduct(productField3.getValue());
 
-        if (items.isEmpty()) {
-            showNoRecordsFoundNotification();
+            showDataOrNotification(stores, StoresDc3);
         } else {
-            StoresDc3.setItems(items);
+            showEmptyFieldNotification("Product");
         }
     }
 
+    private boolean areFieldsNotEmpty(Object... fields) {
+        for (Object field : fields) {
+            if (field == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private <T extends Entity> void showDataOrNotification(List<T> items, CollectionContainer<T> table) {
+        if (items.isEmpty()) {
+            notifications.create(Notifications.NotificationType.TRAY).withCaption("Записей по данному запросу не найдено").show();
+        } else {
+            table.setItems(items);
+        }
+    }
+
+    private void showEmptyFieldNotification(String... fieldNames) {
+        StringBuilder message = new StringBuilder("Эти поля не заполнены: ");
+
+        for (int i = 0; i < fieldNames.length; i++) {
+            message.append(fieldNames[i]);
+            if (i < fieldNames.length - 1) {
+                message.append(", ");
+            }
+        }
+
+        notifications.create().withCaption(message.toString()).show();
+    }
 }
