@@ -3,7 +3,6 @@ package com.company.intership.entity;
 import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @PublishEntityChangedEvents
@@ -11,13 +10,11 @@ import java.math.BigDecimal;
 public class OnlineOrder extends Purchase {
     private static final long serialVersionUID = 1919316582231062618L;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
 
-    @NotNull
-    @Column(name = "ORDER_NUMBER", nullable = false, unique = true)
+    @Column(name = "ORDER_NUMBER", unique = true)
     private String orderNumber;
 
     @Column(name = "ORDER_TOTAL")

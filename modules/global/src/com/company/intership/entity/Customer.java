@@ -14,18 +14,27 @@ public class Customer extends StandardEntity {
     private String fullName;
 
     @Embedded
-    @EmbeddedParameters(nullAllowed = false)
+    @EmbeddedParameters(nullAllowed = true)
     @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "ADDRESS_CITY")),
-            @AttributeOverride(name = "street", column = @Column(name = "ADDRESS_STREET")),
-            @AttributeOverride(name = "building", column = @Column(name = "ADDRESS_BUILDING"))
+            @AttributeOverride(name = "city", column = @Column(name = "ADDRESS_CITY", nullable = true)),
+            @AttributeOverride(name = "street", column = @Column(name = "ADDRESS_STREET", nullable = true)),
+            @AttributeOverride(name = "building", column = @Column(name = "ADDRESS_BUILDING", nullable = true))
     })
     private Address address;
 
     @Column(name = "EMAIL", unique = true)
     private String email;
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")
     private ExtendedUser extendedUser;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public ExtendedUser getExtendedUser() {
         return extendedUser;
@@ -41,14 +50,6 @@ public class Customer extends StandardEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getFullName() {
