@@ -28,7 +28,10 @@ public class OnlineOrderChangedListener {
                     .load(event.getEntityId())
                     .view("online-order-view")
                     .one();
-            editedEntity.setOrderNumber(String.valueOf(uniqueNumbersAPI.getNextNumber(editedEntity.toString())));
+            String sequenceName = "orderNumberSequence";
+            String nextNumber = String.valueOf(uniqueNumbersAPI.getNextNumber(sequenceName));
+
+            editedEntity.setOrderNumber(nextNumber);
             transactionalDataManager.save(editedEntity);
 
             log.info("Online order created with number {}", editedEntity.getOrderNumber());
