@@ -5,9 +5,11 @@ import com.haulmont.cuba.core.entity.annotation.EmbeddedParameters;
 
 import javax.persistence.*;
 
+@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorValue("CUSTOMER")
 @Table(name = "INTERSHIP_CUSTOMER")
 @Entity(name = "intership_Customer")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Customer extends StandardEntity {
     private static final long serialVersionUID = -1467985972714221375L;
 

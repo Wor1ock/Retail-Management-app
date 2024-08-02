@@ -9,7 +9,7 @@ create table INTERSHIP_STORE (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    ADDRESS_CITY varchar(255) not null,
+    ADDRESS_CITY varchar(255),
     ADDRESS_STREET varchar(255),
     ADDRESS_BUILDING varchar(255),
     --
@@ -69,7 +69,7 @@ create table INTERSHIP_PRODUCT_MANUFACTURER (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    ADDRESS_CITY varchar(255) not null,
+    ADDRESS_CITY varchar(255),
     ADDRESS_STREET varchar(255),
     ADDRESS_BUILDING varchar(255),
     --
@@ -148,20 +148,12 @@ create table INTERSHIP_CUSTOMER (
     DELETED_BY varchar(50),
     DTYPE varchar(31),
     --
-    ADDRESS_CITY varchar(255) not null,
+    ADDRESS_CITY varchar(255),
     ADDRESS_STREET varchar(255),
     ADDRESS_BUILDING varchar(255),
     --
     FULL_NAME varchar(255),
     EMAIL varchar(255),
-    --
-    -- from intership_IndividualCustomer
-    FIRST_NAME varchar(255),
-    LAST_NAME varchar(255),
-    MIDDLE_NAME varchar(255),
-    --
-    -- from intership_LegalEntityCustomer
-    COMPANY_NAME varchar(255),
     --
     primary key (ID)
 )^
@@ -194,3 +186,23 @@ alter table SEC_USER add column CUSTOMER_ID uuid ^
 alter table SEC_USER add column DTYPE varchar(31) ^
 update SEC_USER set DTYPE = 'sec$User' where DTYPE is null ^
 -- end SEC_USER
+-- begin INTERSHIP_INDIVIDUALCUSTOMER
+create table intership_IndividualCustomer (
+    ID uuid,
+    --
+    FIRST_NAME varchar(255),
+    LAST_NAME varchar(255),
+    MIDDLE_NAME varchar(255),
+    --
+    primary key (ID)
+)^
+-- end INTERSHIP_INDIVIDUALCUSTOMER
+-- begin INTERSHIP_LEGALENTITYCUSTOMER
+create table intership_LegalEntityCustomer (
+    ID uuid,
+    --
+    COMPANY_NAME varchar(255),
+    --
+    primary key (ID)
+)^
+-- end INTERSHIP_LEGALENTITYCUSTOMER

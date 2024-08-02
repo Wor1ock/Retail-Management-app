@@ -2,9 +2,11 @@ package com.company.intership.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
+@DiscriminatorValue("INDIVIDUAL_CUSTOMER")
+@Table(name = "intership_IndividualCustomer")
 @Entity(name = "intership_IndividualCustomer")
 @NamePattern("%s|lastName")
 public class IndividualCustomer extends Customer {
