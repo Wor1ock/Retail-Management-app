@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Table(name = "INTERSHIP_CUSTOMER")
 @Entity(name = "intership_Customer")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Customer extends StandardEntity {
     private static final long serialVersionUID = -1467985972714221375L;
 
