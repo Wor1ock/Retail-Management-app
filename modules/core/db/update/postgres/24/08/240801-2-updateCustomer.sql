@@ -1,1 +1,0 @@
-update INTERSHIP_CUSTOMER set ADDRESS_CITY = '' where ADDRESS_CITY is null ;

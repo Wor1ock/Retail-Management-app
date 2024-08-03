@@ -181,11 +181,6 @@ create table INTERSHIP_PURCHASE (
     primary key (ID)
 )^
 -- end INTERSHIP_PURCHASE
--- begin SEC_USER
-alter table SEC_USER add column CUSTOMER_ID uuid ^
-alter table SEC_USER add column DTYPE varchar(31) ^
-update SEC_USER set DTYPE = 'sec$User' where DTYPE is null ^
--- end SEC_USER
 -- begin INTERSHIP_INDIVIDUALCUSTOMER
 create table intership_IndividualCustomer (
     ID uuid,
@@ -206,3 +201,8 @@ create table intership_LegalEntityCustomer (
     primary key (ID)
 )^
 -- end INTERSHIP_LEGALENTITYCUSTOMER
+-- begin SEC_USER
+alter table SEC_USER add column CUSTOMER_ID uuid ^
+alter table SEC_USER add column DTYPE varchar(31) ^
+update SEC_USER set DTYPE = 'intership_ExtendedUser' where DTYPE is null ^
+-- end SEC_USER
