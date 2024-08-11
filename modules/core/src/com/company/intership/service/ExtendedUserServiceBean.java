@@ -16,8 +16,8 @@ public class ExtendedUserServiceBean implements ExtendedUserService {
     @Override
     public boolean hasCustomerForUser(ExtendedUser user) {
         return dataManager.load(Customer.class)
-                .query("SELECT c FROM intership_Customer c where c.user = :user")
-                .parameter("user", user)
+                .query("SELECT c FROM intership_Customer c where c.extendedUser.id = :userId")
+                .parameter("userId", user.getId())
                 .list().isEmpty();
     }
 

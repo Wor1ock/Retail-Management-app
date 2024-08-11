@@ -14,6 +14,7 @@ import com.haulmont.cuba.gui.app.security.user.edit.UserEditor;
 import com.haulmont.cuba.gui.components.DialogAction;
 import com.haulmont.cuba.gui.screen.OpenMode;
 import com.haulmont.cuba.gui.screen.Screen;
+import com.haulmont.cuba.gui.screen.StandardOutcome;
 import com.haulmont.cuba.gui.screen.Subscribe;
 import com.haulmont.cuba.security.entity.User;
 import org.slf4j.Logger;
@@ -81,8 +82,13 @@ public class ExtendedUserEditor extends UserEditor {
                 .withInitializer(this::initializeCustomer)
                 .withScreenClass(IndividualCustomerEdit.class)
                 .withOpenMode(OpenMode.DIALOG)
-                .withAfterCloseListener(e -> {
-                    getEditedEntity().setCustomer(e.getScreen().getEditedEntity());
+                .withAfterCloseListener(afterCloseEvent -> {
+                    if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                        IndividualCustomer customer = (IndividualCustomer) afterCloseEvent.getScreen().getEditedEntity();
+                        getEditedEntity().setCustomer(customer);
+                        customer.setExtendedUser(getEditedEntity());
+                        dataManager.commit(customer);
+                    }
                 })
                 .build()
                 .show();
@@ -94,8 +100,13 @@ public class ExtendedUserEditor extends UserEditor {
                 .withInitializer(this::initializeCustomer)
                 .withScreenClass(LegalEntityCustomerEdit.class)
                 .withOpenMode(OpenMode.DIALOG)
-                .withAfterCloseListener(e -> {
-                    getEditedEntity().setCustomer(e.getScreen().getEditedEntity());
+                .withAfterCloseListener(afterCloseEvent -> {
+                    if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                        LegalEntityCustomer customer = (LegalEntityCustomer) afterCloseEvent.getScreen().getEditedEntity();
+                        getEditedEntity().setCustomer(customer);
+                        customer.setExtendedUser(getEditedEntity());
+                        dataManager.commit(customer);
+                    }
                 })
                 .build()
                 .show();
