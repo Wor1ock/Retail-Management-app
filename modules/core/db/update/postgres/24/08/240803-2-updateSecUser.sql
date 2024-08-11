@@ -1,1 +1,0 @@
-update SEC_USER set DTYPE = 'intership_ExtendedUser' where DTYPE is null ;

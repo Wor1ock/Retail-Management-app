@@ -1,7 +1,9 @@
 package com.company.intership.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.EmbeddedParameters;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 
@@ -17,7 +19,6 @@ public class Customer extends StandardEntity {
     private String fullName;
 
     @Embedded
-    @EmbeddedParameters(nullAllowed = true)
     @AttributeOverrides({
             @AttributeOverride(name = "city", column = @Column(name = "ADDRESS_CITY", nullable = true)),
             @AttributeOverride(name = "street", column = @Column(name = "ADDRESS_STREET", nullable = true)),
@@ -28,7 +29,10 @@ public class Customer extends StandardEntity {
     @Column(name = "EMAIL", unique = true)
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
     private ExtendedUser extendedUser;
 
     public Address getAddress() {

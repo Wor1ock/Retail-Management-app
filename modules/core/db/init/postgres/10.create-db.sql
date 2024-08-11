@@ -154,6 +154,7 @@ create table INTERSHIP_CUSTOMER (
     --
     FULL_NAME varchar(255),
     EMAIL varchar(255),
+    USER_ID uuid,
     --
     primary key (ID)
 )^
@@ -202,7 +203,8 @@ create table intership_LegalEntityCustomer (
 )^
 -- end INTERSHIP_LEGALENTITYCUSTOMER
 -- begin SEC_USER
-alter table SEC_USER add column CUSTOMER_ID uuid ^
 alter table SEC_USER add column DTYPE varchar(31) ^
 update SEC_USER set DTYPE = 'intership_ExtendedUser' where DTYPE is null ^
 -- end SEC_USER
+alter table SEC_USER add column CUSTOMER_ID uuid ^
+update SEC_USER set DTYPE = 'intership_ExtendedUser' where DTYPE is null ^
