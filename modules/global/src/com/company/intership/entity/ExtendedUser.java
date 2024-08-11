@@ -4,7 +4,8 @@ import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.cuba.core.entity.annotation.Extends;
 import com.haulmont.cuba.security.entity.User;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 @Entity(name = "intership_ExtendedUser")
 @Extends(User.class)
