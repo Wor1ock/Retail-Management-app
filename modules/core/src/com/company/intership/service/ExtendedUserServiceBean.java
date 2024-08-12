@@ -35,6 +35,7 @@ public class ExtendedUserServiceBean implements ExtendedUserService {
                 .query("SELECT c FROM intership_Customer c WHERE c.extendedUser.id = :userId")
                 .parameter("userId", user.getId())
                 .view("customer-view")
-                .one();
+                .optional()
+                .orElse(null);
     }
 }
