@@ -46,4 +46,9 @@
             <property name="lastName"/>
         </property>
     </view>
+    <view entity="intership_Product" name="random-product-view" extends="_local">
+        <property name="manufacturer" view="_minimal">
+            <property name="fullName"/>
+        </property>
+    </view>
 </views>

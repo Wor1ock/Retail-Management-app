@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://randomProductBrowse.caption"
+        focusComponent="productsTable"
+        messagesPack="com.company.intership.web.screens.randomproducts">
+    <data readOnly="true">
+        <collection id="productsDc" class="com.company.intership.entity.Product">
+
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <groupBox expand="productsTable" spacing="true" height="100%"
+                  caption="msg://randomProductBrowse.groupBoxCaption">
+            <buttonsPanel>
+                <button caption="msg://randomProductBrowse.applyBtn"
+                        action="productsTable.createAct"/>
+            </buttonsPanel>
+
+            <dataGrid id="productsTable" width="100%" dataContainer="productsDc">
+                <actions>
+                    <action id="createAct" type="create"/>
+                </actions>
+                <columns>
+                    <column id="name" property="name"/>
+                    <column id="manufacturer" property="manufacturer"/>
+                    <column id="price" property="manufacturerPrice"/>
+                </columns>
+            </dataGrid>
+        </groupBox>
+    </layout>
+</window>
