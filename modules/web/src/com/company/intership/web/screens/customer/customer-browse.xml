@@ -31,8 +31,8 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="fullName"/>
-                <column id="email"/>
+                <column id="fullName" caption="msg://fullName.column.caption"/>
+                <column id="email" caption="msg://email.column.caption"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
@@ -41,12 +41,12 @@
                 <button id="removeBtn" action="customersTable.remove"/>
 
                 <popupButton id="createButton"
-                             caption="Создать">
+                             caption="msg://createButton.caption">
                     <actions>
                         <action id="createIndividualCustomerAction"
-                                caption="Создать физическое лицо"/>
+                                caption="msg://createIndividualCustomerAction.caption"/>
                         <action id="createLegalEntityAction"
-                                caption="Создать юридическое лицо"/>
+                                caption="msg://createLegalEntityAction.caption"/>
                     </actions>
                 </popupButton>
 
