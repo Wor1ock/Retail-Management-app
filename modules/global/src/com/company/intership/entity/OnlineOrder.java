@@ -3,6 +3,8 @@ package com.company.intership.entity;
 import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @PublishEntityChangedEvents
@@ -21,6 +23,8 @@ public class OnlineOrder extends Purchase {
     private BigDecimal orderTotal;
 
     @Column(name = "DISCOUNT")
+    @Min(0)
+    @Max(99)
     private Integer discount;
 
     public String getOrderNumber() {

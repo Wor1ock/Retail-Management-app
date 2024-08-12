@@ -28,4 +28,13 @@ public class ExtendedUserServiceBean implements ExtendedUserService {
                 .view("customer-view")
                 .list();
     }
+
+    @Override
+    public Customer getCustomer(ExtendedUser user) {
+        return dataManager.load(Customer.class)
+                .query("SELECT c FROM intership_Customer c WHERE c.extendedUser.id = :userId")
+                .parameter("userId", user.getId())
+                .view("customer-view")
+                .one();
+    }
 }

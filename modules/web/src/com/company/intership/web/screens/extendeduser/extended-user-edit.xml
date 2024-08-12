@@ -4,30 +4,4 @@
         extends="com/haulmont/cuba/gui/app/security/user/edit/user-edit.xml"
         messagesPack="com.company.intership.web.screens.extendeduser">
     <layout/>
-<!--    <dsContext>-->
-<!--        <collectionDatasource id="customersDs"-->
-<!--                              class="com.company.intership.entity.Customer"-->
-<!--                              view="_local">-->
-<!--            <query>-->
-<!--                <![CDATA[select p from intership_Customer p where p.user = :userDs]]>-->
-<!--            </query>-->
-<!--        </collectionDatasource>-->
-<!--    </dsContext>-->
-<!--    <layout>-->
-<!--        <groupBox>-->
-<!--            <grid>-->
-<!--                <rows>-->
-<!--                    <row id="propertiesRow">-->
-<!--                        <fieldGroup id="fieldGroupRight">-->
-<!--                            <column>-->
-<!--                                <field id="customerField"-->
-<!--                                       property="customer"-->
-<!--                                       optionsDatasource="customersDs"/>-->
-<!--                            </column>-->
-<!--                        </fieldGroup>-->
-<!--                    </row>-->
-<!--                </rows>-->
-<!--            </grid>-->
-<!--        </groupBox>-->
-<!--    </layout>-->
 </window>

@@ -42,6 +42,8 @@
     </view>
     <view entity="intership_Customer" name="customer-view" extends="_local">
         <property name="address" view="_minimal"/>
-        <property name="extendedUser" view="_minimal"/>
+        <property name="extendedUser" view="_minimal">
+            <property name="lastName"/>
+        </property>
     </view>
 </views>

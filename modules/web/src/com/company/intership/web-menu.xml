@@ -20,6 +20,7 @@
               caption="mainMsg://menu_config.intership_ManufacturerServiceBrowse"/>
         <item screen="intership_StoreServiceBrowse" caption="mainMsg://menu_config.intership_StoreServiceBrowse"/>
         <item screen="intership_Customer.browse" caption="mainMsg://menu_config.intership_Customer.browse"/>
+        <item screen="OnlineOrderBrowse" caption="ExtPurchase"/>
 
     </menu>
 </menu-config>

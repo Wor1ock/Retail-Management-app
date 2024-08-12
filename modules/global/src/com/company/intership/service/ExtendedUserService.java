@@ -22,4 +22,12 @@ public interface ExtendedUserService {
      * @return Список покупателей, связанных с пользователями.
      */
     List<Customer> getCustomers();
+
+    /**
+     * Возвращает покупателя, связанного с указанным пользователем.
+     *
+     * @param user Расширенный пользователь, для которого нужно найти связанного покупателя.
+     * @return Объект {@link Customer}, связанный с пользователем, или {@code null}, если покупатель не найден.
+     */
+    Customer getCustomer(ExtendedUser user);
 }
