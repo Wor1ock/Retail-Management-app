@@ -1,5 +1,6 @@
 package com.company.intership.listeners;
 
+import com.company.intership.entity.OnlineOrder;
 import com.company.intership.entity.ProductInPurchase;
 import com.company.intership.entity.ProductInStore;
 import com.haulmont.cuba.core.TransactionalDataManager;
@@ -24,6 +25,11 @@ public class ProductInPurchaseChangedListener {
         if (!beforeCommitEvent.getType().equals(EntityChangedEvent.Type.DELETED)) {
             ProductInPurchase editedProductInPurchase = transactionalDataManager.load(beforeCommitEvent.getEntityId()).view("productInPurchase-view").one();
             ProductInStore productInStore = editedProductInPurchase.getProductInStore();
+
+            if (editedProductInPurchase.getPurchase() instanceof OnlineOrder) {
+                log.info("Online order detected, no change in product quantity.");
+                return;
+            }
 
             if (editedProductInPurchase.getQuantity() == 0) {
                 return;
