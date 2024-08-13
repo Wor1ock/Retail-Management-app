@@ -7,7 +7,7 @@
     <layout>
         <groupTable id="usersTable">
             <columns>
-                <column id="customer"/>
+                <column id="customer" />
             </columns>
         </groupTable>
     </layout>

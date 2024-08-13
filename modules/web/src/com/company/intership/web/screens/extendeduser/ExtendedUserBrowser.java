@@ -4,7 +4,9 @@ import com.company.intership.entity.Customer;
 import com.company.intership.entity.ExtendedUser;
 import com.company.intership.service.ExtendedUserService;
 import com.haulmont.cuba.gui.app.security.user.browse.UserBrowser;
+import com.haulmont.cuba.gui.data.Datasource;
 import com.haulmont.cuba.gui.screen.Subscribe;
+import com.haulmont.cuba.gui.screen.Target;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -15,9 +17,17 @@ import java.util.stream.Collectors;
 public class ExtendedUserBrowser extends UserBrowser {
     @Inject
     private ExtendedUserService extendedUserService;
-
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
+        updateExtendedUsersWithCustomers();
+    }
+
+    @Subscribe(id = "usersDc", target = Target.DATA_CONTAINER)
+    public void onUsersDcItemChange(Datasource.ItemChangeEvent<ExtendedUser> event) {
+        updateExtendedUsersWithCustomers();
+    }
+
+    private void updateExtendedUsersWithCustomers() {
         List<Customer> customers = extendedUserService.getCustomers();
 
         Map<UUID, ExtendedUser> userMap = usersDs.getItems().stream()
