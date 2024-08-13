@@ -17,16 +17,23 @@
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="individualCustomerDc">
             <column width="350px">
-                <textField id="fullNameField" property="fullName"/>
-                <textField id="emailField" property="email"/>
-                <textField id="firstNameField" property="firstName"/>
-                <textField id="lastNameField" property="lastName"/>
-                <textField id="middleNameField" property="middleName"/>
+                <textField id="fullNameField" property="fullName"
+                           caption="msg://individualCustomerEdit.fullNameField"/>
+                <textField id="emailField" property="email"
+                           caption="msg://individualCustomerEdit.emailField"/>
+                <textField id="firstNameField" property="firstName"
+                           caption="msg://individualCustomerEdit.firstNameField"/>
+                <textField id="lastNameField" property="lastName"
+                           caption="msg://individualCustomerEdit.lastNameField"/>
+                <textField id="middleNameField" property="middleName"
+                           caption="msg://individualCustomerEdit.middleNameField"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-            <button id="closeBtn" action="windowClose"/>
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"
+                    caption="msg://individualCustomerEdit.commitAndCloseBtn"/>
+            <button id="closeBtn" action="windowClose"
+                    caption="msg://individualCustomerEdit.closeBtn"/>
         </hbox>
     </layout>
 </window>
