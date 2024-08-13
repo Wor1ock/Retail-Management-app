@@ -51,8 +51,8 @@ public class ExtendedUserEditor extends UserEditor {
 
     private void showCustomerCreationDialog() {
         dialogs.createOptionDialog()
-                .withCaption("Create Customer")
-                .withMessage("Do you want to create a Physical or Legal entity?")
+                .withCaption(messages.getMessage(getClass(), "createCustomerDialog.caption"))
+                .withMessage(messages.getMessage(getClass(), "createCustomerDialog.message"))
                 .withActions(
                         new DialogAction(DialogAction.Type.YES)
                                 .withHandler(e -> openCustomerCreationScreen()),
@@ -64,14 +64,14 @@ public class ExtendedUserEditor extends UserEditor {
 
     private void openCustomerCreationScreen() {
         dialogs.createOptionDialog()
-                .withCaption("Select Customer type")
-                .withMessage("Do you want to create a Physical or Legal entity?")
+                .withCaption(messages.getMessage(getClass(), "selectCustomerTypeDialog.caption"))
+                .withMessage(messages.getMessage(getClass(), "selectCustomerTypeDialog.message"))
                 .withActions(
                         new DialogAction(DialogAction.Type.YES)
-                                .withCaption("Создать физическое лицо")
+                                .withCaption(messages.getMessage(getClass(), "createIndividualCustomer"))
                                 .withHandler(e -> openIndividualCustomerCreationScreen()),
                         new DialogAction(DialogAction.Type.NO)
-                                .withCaption("Создать юридическое лицо")
+                                .withCaption(messages.getMessage(getClass(), "createLegalEntityCustomer"))
                                 .withHandler(e -> openLegalEntityCustomerCreationScreen())
                 )
                 .show();
