@@ -6,7 +6,7 @@
     <data>
         <instance id="individualCustomerDc"
                   class="com.company.intership.entity.IndividualCustomer">
-            <view extends="_local"/>
+            <view extends="individualCustomer-view"/>
             <loader/>
         </instance>
     </data>
@@ -27,6 +27,8 @@
                            caption="msg://individualCustomerEdit.lastNameField"/>
                 <textField id="middleNameField" property="middleName"
                            caption="msg://individualCustomerEdit.middleNameField"/>
+                <pickerField id="userField" property="extendedUser"
+                             caption="msg://individualCustomerEdit.userField"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

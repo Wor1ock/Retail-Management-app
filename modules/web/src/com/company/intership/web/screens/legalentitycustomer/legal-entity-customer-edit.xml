@@ -6,7 +6,7 @@
     <data>
         <instance id="legalEntityCustomerDc"
                   class="com.company.intership.entity.LegalEntityCustomer">
-            <view extends="_local"/>
+            <view extends="legalEntityCustomer-view"/>
             <loader/>
         </instance>
     </data>
@@ -23,6 +23,8 @@
                            caption="msg://legalEntityCustomerEdit.emailField"/>
                 <textField id="companyNameField" property="companyName"
                            caption="msg://legalEntityCustomerEdit.companyNameField"/>
+                <pickerField id="userField" property="extendedUser"
+                             caption="msg://legalEntityCustomerEdit.userField"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

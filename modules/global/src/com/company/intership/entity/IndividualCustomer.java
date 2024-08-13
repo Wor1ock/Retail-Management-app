@@ -1,7 +1,5 @@
 package com.company.intership.entity;
 
-import com.haulmont.chile.core.annotations.NamePattern;
-
 import javax.persistence.*;
 
 @PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")

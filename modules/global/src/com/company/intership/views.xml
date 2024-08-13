@@ -51,4 +51,16 @@
             <property name="fullName"/>
         </property>
     </view>
+    <view entity="intership_IndividualCustomer" name="individualCustomer-view" extends="_local">
+        <property name="address" view="_minimal">
+            <property name="city"/>
+        </property>
+        <property name="extendedUser" view="_minimal"/>
+    </view>
+    <view entity="intership_LegalEntityCustomer" name="legalEntityCustomer-view" extends="_local">
+        <property name="address" view="_minimal">
+            <property name="city"/>
+        </property>
+        <property name="extendedUser" view="_minimal"/>
+    </view>
 </views>
