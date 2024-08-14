@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://individualCustomerEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.intership.web.screens.individualcustomer">
+    <data>
+        <instance id="individualCustomerDc"
+                  class="com.company.intership.entity.IndividualCustomer">
+            <view extends="individualCustomer-view"/>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="individualCustomerDc">
+            <column width="350px">
+                <textField id="fullNameField" property="fullName"
+                           caption="msg://individualCustomerEdit.fullNameField"/>
+                <textField id="emailField" property="email"
+                           caption="msg://individualCustomerEdit.emailField"/>
+                <textField id="firstNameField" property="firstName"
+                           caption="msg://individualCustomerEdit.firstNameField"/>
+                <textField id="lastNameField" property="lastName"
+                           caption="msg://individualCustomerEdit.lastNameField"/>
+                <textField id="middleNameField" property="middleName"
+                           caption="msg://individualCustomerEdit.middleNameField"/>
+                <pickerField id="userField" property="extendedUser"
+                             caption="msg://individualCustomerEdit.userField"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"
+                    caption="msg://individualCustomerEdit.commitAndCloseBtn"/>
+            <button id="closeBtn" action="windowClose"
+                    caption="msg://individualCustomerEdit.closeBtn"/>
+        </hbox>
+    </layout>
+</window>

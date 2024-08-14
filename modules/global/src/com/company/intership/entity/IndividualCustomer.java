@@ -1,12 +1,11 @@
 package com.company.intership.entity;
 
-import com.haulmont.chile.core.annotations.NamePattern;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
+@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
+@DiscriminatorValue("INDIVIDUAL_CUSTOMER")
+@Table(name = "intership_IndividualCustomer")
 @Entity(name = "intership_IndividualCustomer")
-@NamePattern("%s|lastName")
 public class IndividualCustomer extends Customer {
     private static final long serialVersionUID = -1413106351002197122L;
 

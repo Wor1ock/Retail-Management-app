@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://storeServiceBrowse.caption"
-        messagesPack="com.company.intership.web.screens.store_service">
+        messagesPack="com.company.intership.web.screens.storeservice">
 
     <data>
         <collection id="purchasesByStoreDc" class="com.company.intership.entity.Purchase"

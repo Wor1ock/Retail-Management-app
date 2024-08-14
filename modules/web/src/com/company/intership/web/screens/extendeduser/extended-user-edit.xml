@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.company.intership.web.screens.extendeduser.ExtendedUserEditor"
+        extends="com/haulmont/cuba/gui/app/security/user/edit/user-edit.xml"
+        messagesPack="com.company.intership.web.screens.extendeduser">
+    <layout/>
+</window>

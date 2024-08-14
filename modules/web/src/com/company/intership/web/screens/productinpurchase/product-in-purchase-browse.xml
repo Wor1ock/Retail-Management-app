@@ -10,6 +10,7 @@
             <view extends="_local">
                 <property name="productInStore" view="_minimal">
                     <property name="product" view="_minimal"/>
+                    <property name="store" view="_local"/>
                 </property>
             </view>
             <loader id="productInPurchasesDl">
@@ -35,9 +36,10 @@
                 <action id="create" type="create"/>
             </actions>
             <columns>
-                <column id="productInStore"/>
+                <column id="productInStore.product.name"/>
                 <column id="price"/>
                 <column id="quantity"/>
+                <column id="productInStore.store.name"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

@@ -40,7 +40,12 @@
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="purchasesTable.create"/>
+                <popupButton id="createBtn" caption="msg://purchaseBrowse.createBtn">
+                    <actions>
+                        <action id="createPurchase" caption="msg://purchaseBrowse.createPurchase"/>
+                        <action id="createOnlineOrder" caption="msg://purchaseBrowse.createOnlineOrder"/>
+                    </actions>
+                </popupButton>
                 <button id="editBtn" action="purchasesTable.edit"/>
                 <button id="removeBtn" action="purchasesTable.remove"/>
             </buttonsPanel>

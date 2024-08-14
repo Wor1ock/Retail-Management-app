@@ -5,15 +5,13 @@ import com.haulmont.cuba.core.entity.EmbeddableEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 @MetaClass(name = "intership_Address")
 @Embeddable
 public class Address extends EmbeddableEntity {
     private static final long serialVersionUID = 836218597002479049L;
 
-    @NotNull
-    @Column(name = "CITY", nullable = false)
+    @Column(name = "CITY")
     private String city;
 
     @Column(name = "STREET")

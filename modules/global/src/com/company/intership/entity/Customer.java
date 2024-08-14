@@ -1,10 +1,15 @@
 package com.company.intership.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.EmbeddedParameters;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 
+@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorValue("CUSTOMER")
 @Table(name = "INTERSHIP_CUSTOMER")
 @Entity(name = "intership_Customer")
 public class Customer extends StandardEntity {
@@ -14,18 +19,29 @@ public class Customer extends StandardEntity {
     private String fullName;
 
     @Embedded
-    @EmbeddedParameters(nullAllowed = false)
     @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "ADDRESS_CITY")),
-            @AttributeOverride(name = "street", column = @Column(name = "ADDRESS_STREET")),
-            @AttributeOverride(name = "building", column = @Column(name = "ADDRESS_BUILDING"))
+            @AttributeOverride(name = "city", column = @Column(name = "ADDRESS_CITY", nullable = true)),
+            @AttributeOverride(name = "street", column = @Column(name = "ADDRESS_STREET", nullable = true)),
+            @AttributeOverride(name = "building", column = @Column(name = "ADDRESS_BUILDING", nullable = true))
     })
     private Address address;
 
     @Column(name = "EMAIL", unique = true)
     private String email;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "customer")
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
     private ExtendedUser extendedUser;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public ExtendedUser getExtendedUser() {
         return extendedUser;
@@ -41,14 +57,6 @@ public class Customer extends StandardEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getFullName() {

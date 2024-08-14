@@ -1,18 +1,17 @@
 package com.company.intership.entity;
 
+import com.haulmont.chile.core.annotations.MetaProperty;
+import com.haulmont.cuba.core.entity.annotation.Extends;
 import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity(name = "intership_ExtendedUser")
+@Extends(User.class)
 public class ExtendedUser extends User {
-    private static final long serialVersionUID = -1753912981372491876L;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CUSTOMER_ID")
+    @Transient
+    @MetaProperty
     private Customer customer;
 
     public Customer getCustomer() {

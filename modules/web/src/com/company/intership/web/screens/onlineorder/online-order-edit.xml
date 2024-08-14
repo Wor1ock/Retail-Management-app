@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        messagesPack="com.company.intership.web.screens.onlineorder"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd"
+        extends="com/company/intership/web/screens/purchase/purchase-edit.xml">
+    <data>
+        <instance id="purchaseDc" class="com.company.intership.entity.OnlineOrder">
+            <view extends="_local">
+                <property name="store" view="_minimal"/>
+                <property name="orderTotal"/>
+                <property name="customer" view="_minimal"/>
+                <property name="productsInPurchase" view="productInPurchase-view"/>
+            </view>
+        </instance>
+    </data>
+    <layout>
+        <form id="form" dataContainer="purchaseDc">
+            <column>
+                <pickerField id="customerField" property="customer" caption="msg://customerField.caption">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textField id="orderTotalField" property="orderTotal" editable="false" caption="msg://orderTotalField.caption"/>
+                <textField id="discountField" property="discount" caption="msg://discountField.caption"/>
+            </column>
+        </form>
+    </layout>
+</window>

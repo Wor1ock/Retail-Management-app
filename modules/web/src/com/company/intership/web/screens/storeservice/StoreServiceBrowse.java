@@ -1,4 +1,4 @@
-package com.company.intership.web.screens.store_service;
+package com.company.intership.web.screens.storeservice;
 
 import com.company.intership.entity.Purchase;
 import com.company.intership.entity.Store;
