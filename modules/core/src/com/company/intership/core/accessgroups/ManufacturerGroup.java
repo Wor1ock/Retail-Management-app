@@ -14,16 +14,10 @@ import java.util.UUID;
 @AccessGroup(name = "ManufacturerGroup")
 public class ManufacturerGroup extends AnnotatedAccessGroupDefinition {
 
-    @JpqlConstraint(target = Product.class, where = "{E}.manufacturer.user.id = :session$userManufacturerId")
+    @JpqlConstraint(target = Product.class, where = "{E}.manufacturer.user.id = :session$userId")
     @Override
     public ConstraintsContainer accessConstraints() {
         return super.accessConstraints();
-    }
-
-    @SessionAttribute(name = "userManufacturerId", value = "", javaClass = UUID.class)
-    @Override
-    public Map<String, Serializable> sessionAttributes() {
-        return super.sessionAttributes();
     }
 }
 
