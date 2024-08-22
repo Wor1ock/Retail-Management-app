@@ -17,13 +17,7 @@ import com.haulmont.cuba.security.role.ScreenPermissionsContainer;
 public class ManufacturerRole extends AnnotatedRoleDefinition {
     public final static String NAME = "Manufacturer";
 
-    @ScreenAccess(screenIds = {
-            "intership_ProductManufacturer.browse", "intership_ProductManufacturer.edit",
-            "intership_Product.browse", "intership_Product.edit",
-            "intership_PriceHistory.browse",
-            "intership_ManufacturerService.browse",
-            "application-intership",
-    })
+    @ScreenAccess(screenIds = {"intership_ProductManufacturer.browse", "intership_ProductManufacturer.edit", "intership_Product.browse", "intership_Product.edit", "intership_ManufacturerService.browse", "application-intership", "manageProduction", "intership_PriceHistory.browse", "intership_ManufacturerServiceBrowse"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
         return super.screenPermissions();

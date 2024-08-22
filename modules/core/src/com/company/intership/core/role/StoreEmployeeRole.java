@@ -15,15 +15,7 @@ import com.haulmont.cuba.security.role.ScreenPermissionsContainer;
 public class StoreEmployeeRole extends AnnotatedRoleDefinition {
     public final static String NAME = "StoreEmployee";
 
-    @ScreenAccess(screenIds = {
-            "intership_Store.browse", "intership_Store.edit",
-            "intership_Product.browse", "intership_Product.edit",
-            "intership_ProductInStore.browse", "intership_ProductInStore.edit",
-            "intership_Purchase.browse", "intership_Purchase.edit",
-            "intership_Customer.browse", "intership_Customer.edit",
-            "intership_StoreService", "intership_ProductInStoreService",
-            "application-intership",
-    })
+    @ScreenAccess(screenIds = {"intership_Store.browse", "intership_Store.edit", "intership_Product.browse", "intership_Product.edit", "intership_ProductInStore.browse", "intership_ProductInStore.edit", "intership_Purchase.browse", "intership_Customer.browse", "intership_Customer.edit", "intership_StoreService", "intership_ProductInStoreService", "application-intership", "manageProduction", "intership_TradeNetwork.browse", "manageTradeNetwork", "intership_ProductManufacturer.browse", "intership_StoreServiceBrowse"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
         return super.screenPermissions();
