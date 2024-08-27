@@ -11,7 +11,8 @@ public class IntershipWebTestContainer extends TestContainer {
         appComponents = Arrays.asList(
                 "com.haulmont.cuba",
                 "com.haulmont.reports",
-                "com.haulmont.charts");
+                "com.haulmont.charts",
+                "com.haulmont.addon.bproc");
         appPropertiesFiles = Arrays.asList(
                 // List the files defined in your web.xml
                 // in appPropertiesConfig context parameter of the web module
