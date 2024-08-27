@@ -16,6 +16,9 @@ public class OnlineOrder extends Purchase {
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
 
+    @Column(name = "STATUS")
+    private String status;
+
     @Column(name = "ORDER_NUMBER", unique = true)
     private String orderNumber;
 
@@ -26,6 +29,14 @@ public class OnlineOrder extends Purchase {
     @Min(0)
     @Max(99)
     private Integer discount;
+
+    public OrderStatus getStatus() {
+        return status == null ? null : OrderStatus.fromId(status);
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status == null ? null : status.getId();
+    }
 
     public String getOrderNumber() {
         return orderNumber;
