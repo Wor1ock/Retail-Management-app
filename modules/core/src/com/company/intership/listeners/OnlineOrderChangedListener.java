@@ -7,7 +7,6 @@ import com.haulmont.addon.bproc.service.BprocRuntimeService;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.TransactionalDataManager;
-import com.haulmont.cuba.core.Transactions;
 import com.haulmont.cuba.core.app.UniqueNumbersAPI;
 import com.haulmont.cuba.core.app.events.EntityChangedEvent;
 import com.haulmont.cuba.core.global.UserSessionSource;
@@ -34,8 +33,6 @@ public class OnlineOrderChangedListener {
     @Inject
     private BprocRuntimeService bprocRuntimeService;
     private static final String PROCESS_CODE = "online-order";
-    @Inject
-    private Transactions transactions;
     @Inject
     private Persistence persistence;
 
@@ -66,7 +63,7 @@ public class OnlineOrderChangedListener {
 
                 bprocRuntimeService.startProcessInstanceByKey(
                         PROCESS_CODE,
-                        "2",
+                        editedEntity.getOrderNumber(),
                         processParams
                 );
 

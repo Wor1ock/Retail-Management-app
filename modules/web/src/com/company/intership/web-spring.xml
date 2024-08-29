@@ -16,6 +16,7 @@
                 <entry key="intership_PurchaseService" value="com.company.intership.service.PurchaseService"/>
                 <entry key="intership_StoreService" value="com.company.intership.service.StoreService"/>
                 <entry key="intership_ExtendedUserService" value="com.company.intership.service.ExtendedUserService"/>
+                <entry key="intership_OnlineOrderService" value="com.company.intership.service.OnlineOrderService"/>
             </map>
         </property>
     </bean>
