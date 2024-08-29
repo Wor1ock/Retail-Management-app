@@ -15,6 +15,66 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
     private DataManager dataManager;
 
     @Override
+    public void setNewStatus(OnlineOrder onlineOrder) {
+        onlineOrder.setStatus(OrderStatus.NEW);
+        dataManager.commit(onlineOrder);
+    }
+
+    @Override
+    public void setAcceptedStatus(OnlineOrder onlineOrder) {
+        onlineOrder.setStatus(OrderStatus.ACCEPTED);
+        dataManager.commit(onlineOrder);
+    }
+
+    @Override
+    public void setConfirmedStatus(OnlineOrder onlineOrder) {
+        onlineOrder.setStatus(OrderStatus.CONFIRMED);
+        dataManager.commit(onlineOrder);
+    }
+
+    @Override
+    public void setPendingPaymentStatus(OnlineOrder onlineOrder) {
+        onlineOrder.setStatus(OrderStatus.PENDING_PAYMENT);
+        dataManager.commit(onlineOrder);
+    }
+
+    @Override
+    public void setPaidStatus(OnlineOrder onlineOrder) {
+        onlineOrder.setStatus(OrderStatus.PAID);
+        dataManager.commit(onlineOrder);
+    }
+
+    @Override
+    public void setReadyForPickupStatus(OnlineOrder onlineOrder) {
+        onlineOrder.setStatus(OrderStatus.READY_FOR_PICKUP);
+        dataManager.commit(onlineOrder);
+    }
+
+    @Override
+    public void setCompletedStatus(OnlineOrder onlineOrder) {
+        onlineOrder.setStatus(OrderStatus.COMPLETED);
+        dataManager.commit(onlineOrder);
+    }
+
+    @Override
+    public void setCanceledStatus(OnlineOrder onlineOrder) {
+        if (OrderStatus.PAID.getId() <= onlineOrder.getStatus().getId()) {
+            returnProductsToStore(onlineOrder);
+        }
+        onlineOrder.setStatus(OrderStatus.CANCELED);
+        dataManager.commit(onlineOrder);
+    }
+
+    public void returnProductsToStore(OnlineOrder onlineOrder) {
+        onlineOrder = dataManager.reload(onlineOrder, "online-order-view");
+        for (ProductInPurchase item : onlineOrder.getProductsInPurchase()) {
+            ProductInStore productInStore = item.getProductInStore();
+            productInStore.setQuantity(item.getQuantity());
+            dataManager.commit(productInStore);
+        }
+    }
+
+    @Override
     public void updateProductQuantities(OnlineOrder onlineOrder) {
         onlineOrder = dataManager.reload(onlineOrder, "online-order-view");
         for (ProductInPurchase item : onlineOrder.getProductsInPurchase()) {
@@ -28,17 +88,4 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
         }
     }
 
-    @Override
-    public void setCanceledStatus(OnlineOrder onlineOrder) {
-        if (onlineOrder.getStatus().getId() >= OrderStatus.PAID.getId()) {
-            onlineOrder = dataManager.reload(onlineOrder, "online-order-view");
-            for (ProductInPurchase item : onlineOrder.getProductsInPurchase()) {
-                ProductInStore productInStore = item.getProductInStore();
-                productInStore.setQuantity(item.getQuantity());
-                dataManager.commit(productInStore);
-            }
-        }
-        onlineOrder.setStatus(OrderStatus.CANCELED);
-        dataManager.commit(onlineOrder);
-    }
 }
