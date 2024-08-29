@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://storeBrowse.caption"
         focusComponent="storesTable"
         messagesPack="com.company.intership.web.screens.store">
     <data readOnly="true">
         <collection id="storesDc"
-                    class="com.company.intership.entity.Store">
-            <view extends="_local">
-                <property name="tradeNetwork" view="_minimal">
-                    <property name="fullName"/>
-                </property>
-            </view>
+                    class="com.company.intership.entity.Store"
+                    view="store-view">
             <loader id="storesDl">
                 <query>
                     <![CDATA[select e from intership_Store e]]>

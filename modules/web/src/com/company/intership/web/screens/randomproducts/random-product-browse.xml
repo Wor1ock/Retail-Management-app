@@ -4,9 +4,7 @@
         focusComponent="productsTable"
         messagesPack="com.company.intership.web.screens.randomproducts">
     <data readOnly="true">
-        <collection id="productsDc" class="com.company.intership.entity.Product">
-
-        </collection>
+        <collection id="productsDc" class="com.company.intership.entity.Product"/>
     </data>
     <dialogMode height="600"
                 width="800"/>
