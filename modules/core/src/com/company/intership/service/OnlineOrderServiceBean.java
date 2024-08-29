@@ -19,9 +19,7 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
         onlineOrder = dataManager.reload(onlineOrder, "online-order-view");
         for (ProductInPurchase item : onlineOrder.getProductsInPurchase()) {
             ProductInStore productInStore = item.getProductInStore();
-            if (item.getQuantity() == 0) {
-                return;
-            } else if (item.getQuantity() > productInStore.getQuantity()) {
+            if (item.getQuantity() > productInStore.getQuantity()) {
                 productInStore.setQuantity(0);
             } else {
                 productInStore.setQuantity(productInStore.getQuantity() - item.getQuantity());
@@ -32,6 +30,15 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
 
     @Override
     public void setCanceledStatus(OnlineOrder onlineOrder) {
+        if (onlineOrder.getStatus().getId() >= OrderStatus.PAID.getId()) {
+            onlineOrder = dataManager.reload(onlineOrder, "online-order-view");
+            for (ProductInPurchase item : onlineOrder.getProductsInPurchase()) {
+                ProductInStore productInStore = item.getProductInStore();
+                productInStore.setQuantity(item.getQuantity());
+                dataManager.commit(productInStore);
+            }
+        }
         onlineOrder.setStatus(OrderStatus.CANCELED);
+        dataManager.commit(onlineOrder);
     }
 }
