@@ -21,39 +21,39 @@ public class StoreEmployeeRole extends AnnotatedRoleDefinition {
         return super.screenPermissions();
     }
 
+    @EntityAccess(entityClass = Product.class, operations = EntityOp.READ)
+    @EntityAccess(entityClass = PriceHistory.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = Purchase.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductInPurchase.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = Customer.class, operations = EntityOp.READ)
-    @EntityAccess(entityClass = TradeNetwork.class, operations = {EntityOp.READ, EntityOp.UPDATE})
+    @EntityAccess(entityClass = TradeNetwork.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductManufacturer.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductInStore.class, operations = {EntityOp.READ, EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE})
-    @EntityAccess(entityClass = PriceHistory.class, operations = {EntityOp.READ, EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE})
     @EntityAccess(entityClass = OnlineOrder.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = LegalEntityCustomer.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = IndividualCustomer.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ExtendedUser.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = Address.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = Store.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.READ, EntityOp.DELETE})
-    @EntityAccess(entityClass = Product.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.READ, EntityOp.DELETE})
     @Override
     public EntityPermissionsContainer entityPermissions() {
         return super.entityPermissions();
     }
 
+    @EntityAttributeAccess(entityClass = Product.class, view = "*")
+    @EntityAttributeAccess(entityClass = PriceHistory.class, view = "*")
     @EntityAttributeAccess(entityClass = Purchase.class, view = "*")
     @EntityAttributeAccess(entityClass = ProductInPurchase.class, view = "*")
     @EntityAttributeAccess(entityClass = Customer.class, view = "*")
     @EntityAttributeAccess(entityClass = TradeNetwork.class, modify = "*")
     @EntityAttributeAccess(entityClass = ProductManufacturer.class, view = "*")
     @EntityAttributeAccess(entityClass = ProductInStore.class, modify = "*")
-    @EntityAttributeAccess(entityClass = PriceHistory.class, modify = "*")
     @EntityAttributeAccess(entityClass = OnlineOrder.class, view = "*")
     @EntityAttributeAccess(entityClass = LegalEntityCustomer.class, view = "*")
     @EntityAttributeAccess(entityClass = IndividualCustomer.class, view = "*")
     @EntityAttributeAccess(entityClass = ExtendedUser.class, view = "*")
     @EntityAttributeAccess(entityClass = Address.class, view = "*")
     @EntityAttributeAccess(entityClass = Store.class, modify = "*")
-    @EntityAttributeAccess(entityClass = Product.class, modify = "*")
     @Override
     public EntityAttributePermissionsContainer entityAttributePermissions() {
         return super.entityAttributePermissions();

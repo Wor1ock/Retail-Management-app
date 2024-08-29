@@ -21,11 +21,11 @@ public class ManufacturerRole extends AnnotatedRoleDefinition {
         return super.screenPermissions();
     }
 
+    @EntityAccess(entityClass = Product.class, operations = {EntityOp.READ, EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE})
+    @EntityAccess(entityClass = PriceHistory.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = TradeNetwork.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = Store.class, operations = EntityOp.READ)
-    @EntityAccess(entityClass = Purchase.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductInStore.class, operations = EntityOp.READ)
-    @EntityAccess(entityClass = ProductInPurchase.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = OnlineOrder.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = LegalEntityCustomer.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = IndividualCustomer.class, operations = EntityOp.READ)
@@ -33,13 +33,13 @@ public class ManufacturerRole extends AnnotatedRoleDefinition {
     @EntityAccess(entityClass = Customer.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = Address.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductManufacturer.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.READ, EntityOp.DELETE})
-    @EntityAccess(entityClass = Product.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.READ, EntityOp.DELETE})
-    @EntityAccess(entityClass = PriceHistory.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.READ, EntityOp.DELETE})
     @Override
     public EntityPermissionsContainer entityPermissions() {
         return super.entityPermissions();
     }
 
+    @EntityAttributeAccess(entityClass = Product.class, modify = "*")
+    @EntityAttributeAccess(entityClass = PriceHistory.class, view = "*")
     @EntityAttributeAccess(entityClass = TradeNetwork.class, view = "*")
     @EntityAttributeAccess(entityClass = Store.class, view = "*")
     @EntityAttributeAccess(entityClass = Purchase.class, view = "*")
@@ -52,8 +52,6 @@ public class ManufacturerRole extends AnnotatedRoleDefinition {
     @EntityAttributeAccess(entityClass = Customer.class, view = "*")
     @EntityAttributeAccess(entityClass = Address.class, view = "*")
     @EntityAttributeAccess(entityClass = ProductManufacturer.class, modify = "*")
-    @EntityAttributeAccess(entityClass = Product.class, modify = "*")
-    @EntityAttributeAccess(entityClass = PriceHistory.class, modify = "*")
     @Override
     public EntityAttributePermissionsContainer entityAttributePermissions() {
         return super.entityAttributePermissions();

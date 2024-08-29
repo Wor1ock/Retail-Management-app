@@ -22,13 +22,13 @@ public class CustomerRole extends AnnotatedRoleDefinition {
     }
 
 
-    @EntityAccess(entityClass = Product.class, operations = {EntityOp.READ, EntityOp.UPDATE, EntityOp.CREATE})
-    @EntityAccess(entityClass = TradeNetwork.class, operations = {EntityOp.READ, EntityOp.UPDATE})
-    @EntityAccess(entityClass = Store.class, operations = {EntityOp.READ, EntityOp.UPDATE})
+    @EntityAccess(entityClass = ExtendedUser.class, operations = EntityOp.READ)
+    @EntityAccess(entityClass = Product.class, operations = EntityOp.READ)
+    @EntityAccess(entityClass = TradeNetwork.class, operations = EntityOp.READ)
+    @EntityAccess(entityClass = Store.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductManufacturer.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductInStore.class, operations = EntityOp.READ)
-    @EntityAccess(entityClass = ExtendedUser.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.READ, EntityOp.DELETE})
-    @EntityAccess(entityClass = PriceHistory.class, operations = {EntityOp.CREATE, EntityOp.READ})
+    @EntityAccess(entityClass = PriceHistory.class, operations = EntityOp.READ)
     @EntityAccess(entityClass = ProductInPurchase.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.READ, EntityOp.DELETE})
     @EntityAccess(entityClass = LegalEntityCustomer.class, operations = {EntityOp.READ, EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE})
     @EntityAccess(entityClass = IndividualCustomer.class, operations = {EntityOp.READ, EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE})
@@ -41,12 +41,12 @@ public class CustomerRole extends AnnotatedRoleDefinition {
         return super.entityPermissions();
     }
 
+    @EntityAttributeAccess(entityClass = ExtendedUser.class, view = "*")
     @EntityAttributeAccess(entityClass = Product.class, modify = "*")
     @EntityAttributeAccess(entityClass = TradeNetwork.class, modify = "*")
     @EntityAttributeAccess(entityClass = Store.class, modify = "*")
     @EntityAttributeAccess(entityClass = ProductManufacturer.class, view = "*")
     @EntityAttributeAccess(entityClass = ProductInStore.class, view = "*")
-    @EntityAttributeAccess(entityClass = ExtendedUser.class, modify = "*")
     @EntityAttributeAccess(entityClass = ProductInPurchase.class, modify = "*")
     @EntityAttributeAccess(entityClass = PriceHistory.class, modify = "*")
     @EntityAttributeAccess(entityClass = LegalEntityCustomer.class, modify = "*")
