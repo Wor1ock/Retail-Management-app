@@ -69,7 +69,7 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
         onlineOrder = dataManager.reload(onlineOrder, "online-order-view");
         for (ProductInPurchase item : onlineOrder.getProductsInPurchase()) {
             ProductInStore productInStore = item.getProductInStore();
-            productInStore.setQuantity(item.getQuantity());
+            productInStore.setQuantity(productInStore.getQuantity() + item.getQuantity());
             dataManager.commit(productInStore);
         }
     }
