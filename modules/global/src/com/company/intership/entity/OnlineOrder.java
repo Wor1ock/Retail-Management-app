@@ -17,7 +17,7 @@ public class OnlineOrder extends Purchase {
     private Customer customer;
 
     @Column(name = "STATUS")
-    private Integer status;
+    private String status;
 
     @Column(name = "ORDER_NUMBER", unique = true)
     private String orderNumber;
