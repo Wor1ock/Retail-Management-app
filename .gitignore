@@ -5,6 +5,7 @@
 /modules/core/build/
 /modules/global/build/
 /modules/web/build/
+modules/web-toolkit/build/
 
 # Gradle
 /.gradle/

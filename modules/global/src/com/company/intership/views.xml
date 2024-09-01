@@ -63,4 +63,20 @@
         </property>
         <property name="extendedUser" view="_minimal"/>
     </view>
+    <view entity="intership_OnlineOrder" name="online-order-view" extends="_local">
+        <property name="customer" view="_minimal">
+            <property name="extendedUser" view="_minimal"/>
+        </property>
+        <property name="store" view="_minimal"/>
+        <property name="productsInPurchase" view="_minimal">
+            <property name="price"/>
+            <property name="quantity"/>
+            <property name="productInStore" view="_minimal">
+                <property name="product" view="_minimal"/>
+                <property name="price"/>
+                <property name="quantity"/>
+                <property name="store" view="_minimal"/>
+            </property>
+        </property>
+    </view>
 </views>

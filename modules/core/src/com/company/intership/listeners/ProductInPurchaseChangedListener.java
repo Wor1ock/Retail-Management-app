@@ -28,6 +28,7 @@ public class ProductInPurchaseChangedListener {
 
             if (editedProductInPurchase.getPurchase() instanceof OnlineOrder) {
                 log.info("Online order detected, no change in product quantity.");
+                transactionalDataManager.save(productInStore);
                 return;
             }
 
