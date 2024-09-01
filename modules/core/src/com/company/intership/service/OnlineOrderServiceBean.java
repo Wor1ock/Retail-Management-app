@@ -8,6 +8,9 @@ import com.haulmont.cuba.core.global.DataManager;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.EnumSet;
+
+import static com.company.intership.entity.OrderStatus.*;
 
 @Service(OnlineOrderService.NAME)
 public class OnlineOrderServiceBean implements OnlineOrderService {
@@ -40,7 +43,7 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
 
     @Override
     public void setPaidStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(OrderStatus.PAID);
+        onlineOrder.setStatus(PAID);
         dataManager.commit(onlineOrder);
     }
 
@@ -52,13 +55,13 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
 
     @Override
     public void setCompletedStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(OrderStatus.COMPLETED);
+        onlineOrder.setStatus(COMPLETED);
         dataManager.commit(onlineOrder);
     }
 
     @Override
     public void setCanceledStatus(OnlineOrder onlineOrder) {
-        if (OrderStatus.PAID.getId() <= onlineOrder.getStatus().getId()) {
+        if (OrderStatus.NEED_TO_INCREASE_AMOUNT.contains(onlineOrder.getStatus())) {
             returnProductsToStore(onlineOrder);
         }
         onlineOrder.setStatus(OrderStatus.CANCELED);
