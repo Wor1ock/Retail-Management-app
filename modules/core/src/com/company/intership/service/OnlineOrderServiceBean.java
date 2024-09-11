@@ -8,9 +8,8 @@ import com.haulmont.cuba.core.global.DataManager;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.EnumSet;
 
-import static com.company.intership.entity.OrderStatus.*;
+import static com.company.intership.entity.OrderStatus.NEED_TO_INCREASE_AMOUNT;
 
 @Service(OnlineOrderService.NAME)
 public class OnlineOrderServiceBean implements OnlineOrderService {
@@ -18,50 +17,15 @@ public class OnlineOrderServiceBean implements OnlineOrderService {
     private DataManager dataManager;
 
     @Override
-    public void setNewStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(OrderStatus.NEW);
+    public void setStatus(OnlineOrder onlineOrder, String statusString) {
+        OrderStatus status = OrderStatus.valueOf(statusString.toUpperCase());
+        onlineOrder.setStatus(status);
         dataManager.commit(onlineOrder);
     }
 
     @Override
-    public void setAcceptedStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(OrderStatus.ACCEPTED);
-        dataManager.commit(onlineOrder);
-    }
-
-    @Override
-    public void setConfirmedStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(OrderStatus.CONFIRMED);
-        dataManager.commit(onlineOrder);
-    }
-
-    @Override
-    public void setPendingPaymentStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(OrderStatus.PENDING_PAYMENT);
-        dataManager.commit(onlineOrder);
-    }
-
-    @Override
-    public void setPaidStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(PAID);
-        dataManager.commit(onlineOrder);
-    }
-
-    @Override
-    public void setReadyForPickupStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(OrderStatus.READY_FOR_PICKUP);
-        dataManager.commit(onlineOrder);
-    }
-
-    @Override
-    public void setCompletedStatus(OnlineOrder onlineOrder) {
-        onlineOrder.setStatus(COMPLETED);
-        dataManager.commit(onlineOrder);
-    }
-
-    @Override
-    public void setCanceledStatus(OnlineOrder onlineOrder) {
-        if (OrderStatus.NEED_TO_INCREASE_AMOUNT.contains(onlineOrder.getStatus())) {
+    public void setStatusCanceled(OnlineOrder onlineOrder) {
+        if (NEED_TO_INCREASE_AMOUNT.contains(onlineOrder.getStatus())) {
             returnProductsToStore(onlineOrder);
         }
         onlineOrder.setStatus(OrderStatus.CANCELED);

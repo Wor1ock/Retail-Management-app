@@ -35,8 +35,8 @@
     </sequenceFlow>
     <sequenceFlow id="SequenceFlow_122zwet" name="approved" sourceRef="Task_03if5nu" targetRef="Task_1u7kry5">
       <extensionElements>
-        <flowable:executionListener expression="${intership_OnlineOrderService.setAcceptedStatus(onlineOrder)}" event="start" />
         <bproc:conditionDetails conditionSource="userTaskOutcome" conditionType="anyoneCompleted" userTaskId="Task_03if5nu" userTaskOutcome="approve" />
+        <flowable:executionListener expression="${intership_OnlineOrderService.setStatus(onlineOrder, &#34;Accepted&#34;)}" event="start" />
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression">${execution.getVariable('Task_03if5nu_result') != null &amp;&amp; bproc_UserTaskResults.containsOutcome(execution.getVariable('Task_03if5nu_result'), 'approve')}</conditionExpression>
     </sequenceFlow>
@@ -62,7 +62,7 @@
     <sequenceFlow id="SequenceFlow_08bndh4" name="approved" sourceRef="Task_0ww7jz5" targetRef="Task_0kgj3xf">
       <extensionElements>
         <bproc:conditionDetails conditionSource="userTaskOutcome" conditionType="anyoneCompleted" userTaskId="Task_0ww7jz5" userTaskOutcome="approve" />
-        <flowable:executionListener expression="${intership_OnlineOrderService.setReadyForPickupStatus(onlineOrder)}" event="start" />
+        <flowable:executionListener expression="${intership_OnlineOrderService.setStatus(onlineOrder, &#34;Ready_for_pickup&#34;)}" event="start" />
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression">${execution.getVariable('Task_0ww7jz5_result') != null &amp;&amp; bproc_UserTaskResults.containsOutcome(execution.getVariable('Task_0ww7jz5_result'), 'approve')}</conditionExpression>
     </sequenceFlow>
@@ -88,9 +88,9 @@
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression">${execution.getVariable('Task_1u7kry5_result') != null &amp;&amp; bproc_UserTaskResults.containsOutcome(execution.getVariable('Task_1u7kry5_result'), 'reject')}</conditionExpression>
     </sequenceFlow>
-    <serviceTask id="ServiceTask_13f03mj" name="Cancel Order" flowable:expression="${intership_OnlineOrderService.setCanceledStatus(onlineOrder)}" bproc:taskType="springBean">
+    <serviceTask id="ServiceTask_13f03mj" name="Cancel Order" flowable:expression="${intership_OnlineOrderService.setStatusCanceled(onlineOrder)}" bproc:taskType="springBean">
       <extensionElements>
-        <bproc:springBean beanName="intership_OnlineOrderService" methodName="setCanceledStatus">
+        <bproc:springBean beanName="intership_OnlineOrderService" methodName="setStatusCanceled">
           <bproc:methodParam name="onlineOrder" type="com.company.intership.entity.OnlineOrder" isVariable="true">onlineOrder</bproc:methodParam>
         </bproc:springBean>
       </extensionElements>
@@ -152,7 +152,7 @@
     <sequenceFlow id="SequenceFlow_1irprge" name="approved" sourceRef="Task_0q6fppe" targetRef="Task_0wu4ezc">
       <extensionElements>
         <bproc:conditionDetails conditionSource="userTaskOutcome" conditionType="anyoneCompleted" userTaskId="Task_0q6fppe" userTaskOutcome="approve" />
-        <flowable:executionListener expression="${intership_OnlineOrderService.setPaidStatus(onlineOrder)}" event="start" />
+        <flowable:executionListener expression="${intership_OnlineOrderService.setStatus(onlineOrder, &#34;Paid&#34;)}" event="start" />
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression">${execution.getVariable('Task_0q6fppe_result') != null &amp;&amp; bproc_UserTaskResults.containsOutcome(execution.getVariable('Task_0q6fppe_result'), 'approve')}</conditionExpression>
     </sequenceFlow>
@@ -203,14 +203,14 @@
     <sequenceFlow id="SequenceFlow_1gl04ec" name="approved" sourceRef="Task_0kgj3xf" targetRef="EndEvent_1qjl6ih">
       <extensionElements>
         <bproc:conditionDetails conditionSource="userTaskOutcome" conditionType="anyoneCompleted" userTaskId="Task_0kgj3xf" userTaskOutcome="approve" />
-        <flowable:executionListener expression="${intership_OnlineOrderService.setCompletedStatus(onlineOrder)}" event="start" />
+        <flowable:executionListener expression="${intership_OnlineOrderService.setStatus(onlineOrder, &#34;Completed&#34;)}" event="start" />
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression">${execution.getVariable('Task_0kgj3xf_result') != null &amp;&amp; bproc_UserTaskResults.containsOutcome(execution.getVariable('Task_0kgj3xf_result'), 'approve')}</conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="SequenceFlow_0zqbub8" name="approved" sourceRef="Task_1u7kry5" targetRef="Task_1vd0gnm">
       <extensionElements>
         <bproc:conditionDetails conditionSource="userTaskOutcome" conditionType="anyoneCompleted" userTaskId="Task_1u7kry5" userTaskOutcome="approve" />
-        <flowable:executionListener expression="${intership_OnlineOrderService.setConfirmedStatus(onlineOrder)}" event="start" />
+        <flowable:executionListener expression="${intership_OnlineOrderService.setStatus(onlineOrder, &#34;Confirmed&#34;)}" event="start" />
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression">${execution.getVariable('Task_1u7kry5_result') != null &amp;&amp; bproc_UserTaskResults.containsOutcome(execution.getVariable('Task_1u7kry5_result'), 'approve')}</conditionExpression>
     </sequenceFlow>
@@ -242,7 +242,7 @@
     <sequenceFlow id="SequenceFlow_0ge3wo4" name="approved" sourceRef="Task_1vd0gnm" targetRef="Task_0q6fppe">
       <extensionElements>
         <bproc:conditionDetails conditionSource="userTaskOutcome" conditionType="anyoneCompleted" userTaskId="Task_1vd0gnm" userTaskOutcome="approve" />
-        <flowable:executionListener expression="${intership_OnlineOrderService.setPendingPaymentStatus(onlineOrder)}" event="start" />
+        <flowable:executionListener expression="${intership_OnlineOrderService.setStatus(onlineOrder, &#34;Pending_payment&#34;)}" event="start" />
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression">${execution.getVariable('Task_1vd0gnm_result') != null &amp;&amp; bproc_UserTaskResults.containsOutcome(execution.getVariable('Task_1vd0gnm_result'), 'approve')}</conditionExpression>
     </sequenceFlow>
